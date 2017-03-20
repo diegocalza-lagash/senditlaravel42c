@@ -10,6 +10,7 @@ class DataSendController extends \BaseController {
 	public function index()
 	{
 		//
+		echo "holadad";
 	}
 
 
@@ -21,6 +22,8 @@ class DataSendController extends \BaseController {
 	public function create()
 	{
 		//
+
+
 	}
 
 
@@ -32,6 +35,9 @@ class DataSendController extends \BaseController {
 	public function store()
 	{
 		//
+		echo "holapost";
+		$aRequest = json_decode(file_get_contents('php://input'), true);
+		print_r($aRequest);
 	}
 
 
