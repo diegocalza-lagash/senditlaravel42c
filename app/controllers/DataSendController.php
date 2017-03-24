@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 class Console
 {
     /**
@@ -45,6 +46,9 @@ class DataSendController extends \BaseController {
 		$var = array('Oh', 'yes', 'baby', '!!');
 		echo Console::log('un_nombre', $var);
 		//$mesj = new ConsoleLog("log","este es el mensaje");
+		$aRequest = json_decode(file_get_contents('php://input'), true);
+                print_r($aRequest);
+		
 
 	}
 
@@ -70,15 +74,17 @@ class DataSendController extends \BaseController {
 	public function store()
 	{
 		//
-		echo "holapost";
-		$aRequest = json_decode(file_get_contents('php://input'), true);
+	echo "holapost"." ";
+		//ob_start();
+		$aRequest = json_decode(file_get_contents('php://input'),true);
 		print_r($aRequest);
-		echo Console::log('datos',$aRequest);
-
-		/*$m = new MongoClient();
-		$db = $m->mibasedb;
-		$collection = $db->miData;
-		$collection->insert($aRequest);*/
+		echo "hola again";
+		$fichero=fopen('test.log','w');
+	 		if($fichero == false) {
+   			die("No se ha podido crear el archivo.");
+		}
+		fwrite($fichero,json_encode($aRequest));
+		fclose($fichero);	
 	}
 
 
