@@ -32,6 +32,7 @@ class Console
     }
 }
 
+
 class DataSendController extends \BaseController {
 
 	/**
@@ -39,17 +40,83 @@ class DataSendController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
 		//
-		echo "holadad";
-		$var = array('Oh', 'yes', 'baby', '!!');
-		echo Console::log('un_nombre', $var);
-		//$mesj = new ConsoleLog("log","este es el mensaje");
-		$aRequest = json_decode(file_get_contents('php://input'), true);
-                print_r($aRequest);
-		
+		//echo "hola";
+		/*$m = new MongoDB\Client();
+		$db = $m->formSendit2;
+		$collection = $db->DataFormTest;
+		$docSendit = $collection->find();
+		foreach ($docSendit as $row) {
+			# code...
+			//print_r($row);
+			echo $row->Entry->UserEmail;
+		}*/
+		return View::make('dataSends.index');
 
+	}
+	public function report($id){
+
+
+		//echo "hola report: ".$id;
+		$m = new MongoDB\Client();
+		$db = $m->formSendit2;
+		$collection = $db->DataFormTest;
+		//$docSendit = $collection->find(['ProviderId' => $id]);
+		//$db->users->find(array("age" => array('$gt' => 33, '$lte' => 40)));
+		$docSendit = $collection->findOne(['Entry.Id' => $id]);
+
+		//echo "pase";
+		//print_r($docSendit);
+		//var_dump($docSendit);
+		/*echo $docSendit['Entry']['StartTime'];
+		echo $docSendit['Entry']['UserFirstName'].$docSendit['Entry']['UserLastName'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
+		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];*/
+
+		/* $StartTime = $docSendit['Entry']['StartTime'];
+		 $UserFirstName =$docSendit['Entry']['UserFirstName'];
+		 $UserLastName = $docSendit['Entry']['UserLastName'];
+		 $mantencion_equipos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
+		 $Trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+		 $Sub_trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+		 $Sistema_bloqueo = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
+		 $fecha_inicio_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
+		 $fecha_termino_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
+		 $fecha_inicio_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
+		 $fecha_termino_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
+		 $porcentaje_avance_fisico = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
+		 $observaciones = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];
+
+		Excel::create("report2",function($excel){
+
+			$excel->sheet('kalza',function($sheet){
+				//$UserFirstName =$docSendit['Entry']['UserFirstName'];
+				$data=[];
+				array_push($data, array(
+							array('data1', 'data2'),
+					    	array('data3', 'data4')));
+				/*$data = array(
+					    	array('data1', 'data2'),
+					    	array('data3', 'data4')
+							);
+
+				$sheet->with($data);
+
+			});
+
+		})->export('xls');*/
+
+		//return View::make('dataSends.index');
 	}
 
 
@@ -74,17 +141,65 @@ class DataSendController extends \BaseController {
 	public function store()
 	{
 		//
-	echo "holapost"." ";
+	//echo "holapost"." ";
 		//ob_start();
 		$aRequest = json_decode(file_get_contents('php://input'),true);
-		print_r($aRequest);
-		echo "hola again";
+		//print_r($aRequest);
+		//echo $aRequest['Entry']['UserEmail'];
+		/*foreach($aRequest as $obj){
+	        $email = $obj->Entry->UserEmail;
+	        //$mantencion_equipos = $obj->AnswersJson->Trabajos_planificados2->mantencion_equipos;
+	        echo $email;//." ".$mantencion_equipos." ";
+		}*/
+		//echo "hola again";
 		$fichero=fopen('test.log','w');
 	 		if($fichero == false) {
    			die("No se ha podido crear el archivo.");
 		}
 		fwrite($fichero,json_encode($aRequest));
-		fclose($fichero);	
+		fclose($fichero);
+
+//require 'vendor/autoload.php';
+
+
+
+		//$m = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+		//$m = new MongoCient();//obsoleta desde mongo 1.0.0
+		$m = new MongoDB\Client();
+		$db = $m->formSendit2;
+
+		$collection = $db->DataFormTest;
+		//var_dump($collection);
+		//require 'vendor/autoload.php';
+		 $doc = $collection->insertOne($aRequest);
+		 //echo "doc insertado";
+
+		 $email = $aRequest['Entry']['UserEmail'];
+
+
+
+		/*$providerId = $aRequest['ProviderId'];//id del proveedor del json entrante
+		$docSendit = $collection->findOne(['ProviderId' => $providerId]);
+		echo "mostrando email de la bdmongo: ".$docSendit['Entry']['UserEmail'];
+		echo $docSendit['Entry']['UserFirstName'];
+		echo $docSendit['Entry']['UserLastName'];
+		echo $docSendit['Entry']['Latitude'];
+		$email = $collection->findOne(['Entry.UserEmail' => $email]);*/
+
+		//var_dump($providerId);
+		//var_dump($email);
+		//printf("Inserted %d documents",$insert->getInsertedCount());
+		 //echo "mostrando id deldocumento insertado";
+		//var_dump($doc->getInsertedId());
+
+
+	/*foreach ($db->listCollections() as $collec) {
+			# code...
+			echo "mostrando colecciones";
+			var_dump($collec);
+		}*/
+
+
 	}
 
 

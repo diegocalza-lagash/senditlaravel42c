@@ -94,7 +94,7 @@ return array(
 	*/
 
 	'providers' => array(
-
+		'Maatwebsite\Excel\ExcelServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
@@ -150,6 +150,7 @@ return array(
 
 	'aliases' => array(
 
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 		'App'             => 'Illuminate\Support\Facades\App',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',

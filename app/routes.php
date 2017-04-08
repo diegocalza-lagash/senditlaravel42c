@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL);
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -16,3 +16,10 @@ Route::get('/', function()
 	return View::make('hello');
 });
 Route::resource('data','DataSendController');
+Route::controller('dataform','DataSendController');
+Route::get('/', function()
+{
+	return View::make('dataform');
+});
+Route::get('report/{id}', 'DataSendController@report');
+Route::resource('excel','ExcelController');

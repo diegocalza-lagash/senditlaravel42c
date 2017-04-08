@@ -1,0 +1,51 @@
+[{"id_fruta":"1","nombre_fruta":"Manzana","cantidad":"100"},{"id_fruta":"2","nombre_fruta":"Guayaba","cantidad":"167"}]
+
+
+json en test.log con filegetcontent sin true:
+
+{
+"ProviderId":45206,
+"IntegrationKey":"aa28dc289d6c408a94978c959e813cce",
+"Entry":
+	{
+		"Id":"cb676bc7c9d1440e8a62a73f01052ec0",
+		"FormCode":"PilotoR1",
+		"FormVersion":1,
+		"UserFirstName":"Diego",
+		"UserLastName":"Calzadilla",
+		"UserEmail":"diegocalzadi@gmail.com",
+		"Latitude":-36.743702623096,
+		"Longitude":-73.003219077432,
+		"StartTime":"2017-03-23T15:50:56.0000000Z",
+		"ReceivedTime":"2017-03-23T15:54:11.2470000Z",
+		"CompleteTime":"2017-03-23T15:51:07.0000000Z",
+	"AnswersJson":
+		{
+			"Trabajos_planificados2":
+			{
+				"mantencion_equipos":"cr",
+				"Trabajos":"Cambio de Caps (60cu)",
+				"Sub_trabajos":"Marcado de Caps",
+				"Sistema_bloqueo":null,
+				"supervisor":null,
+				"fecha_inicio_prog":"23\/02\/2017",
+				"fecha_termino_prog":"24\/02\/2017",
+				"fecha_inicio_real":"2017-03-23T15:50:57Z",
+				"fecha_termino_real":"2017-03-23T15:50:57Z",
+				"porcentaje_avance_fisico":null,
+				"observaciones":null
+			},
+			"Fotografias":
+			{
+			"foto1":null,
+			"descripcion_foto1":null,
+			"foto2":null,
+			"descripcion_foto2":null,
+			"video":null,
+			"descripcion_video":null
+			}
+		},
+	"ProviderId":0,
+	"DSRowId":"cb676bc7-c9d1-440e-8a62-a73f01052ec0"
+	}
+}
