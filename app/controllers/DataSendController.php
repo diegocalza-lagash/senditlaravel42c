@@ -159,7 +159,7 @@ class DataSendController extends \BaseController {
 		fwrite($fichero,json_encode($aRequest));
 		fclose($fichero);
 
-//require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
 
 
