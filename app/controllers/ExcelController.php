@@ -51,7 +51,7 @@ class ExcelController extends \BaseController {
 		// PHPExcel_IOFactory
 		//include 'PHPExcel/IOFactory.php';
 		// Creamos un objeto PHPExcel
-		$m = new MongoDB\Client();
+		$m = new MongoClient();
 		$db = $m->formSendit2;
 		$collection = $db->DataFormTest;
 		$docSendit = $collection->findOne(['Entry.Id' => $id]);
