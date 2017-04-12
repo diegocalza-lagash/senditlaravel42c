@@ -1,5 +1,5 @@
 <?php
-		$m = new MongoDB\Client();
+		$m = new MongoClient();
 		$db = $m->formSendit2;
 		$collection = $db->DataFormTest;
 		$docSendit = $collection->find();
