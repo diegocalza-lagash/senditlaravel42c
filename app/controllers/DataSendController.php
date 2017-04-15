@@ -60,12 +60,12 @@ class DataSendController extends \BaseController {
 
 
 		//echo "hola report: ".$id;
-		$m = new MongoDB\Client();
-		$db = $m->formSendit2;
-		$collection = $db->DataFormTest;
+		//$m = new MongoDB\Client();
+		//$db = $m->formSendit2;
+		//$collection = $db->DataFormTest;
 		//$docSendit = $collection->find(['ProviderId' => $id]);
 		//$db->users->find(array("age" => array('$gt' => 33, '$lte' => 40)));
-		$docSendit = $collection->findOne(['Entry.Id' => $id]);
+		//$docSendit = $collection->findOne(['Entry.Id' => $id]);
 
 		//echo "pase";
 		//print_r($docSendit);
