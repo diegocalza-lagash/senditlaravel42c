@@ -75,7 +75,7 @@ class ExcelController extends \BaseController {
 		$objPHPExcel = new PHPExcel();
 		// Leemos un archivo Excel 2007
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$objPHPExcel = $objReader->load("public/reports/reporteRudelEmpty.xlsx");
+		$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudelEmpty.xlsx");
 		// Indicamos que se pare en la hoja uno del libro
 		$objPHPExcel->setActiveSheetIndex(0);
 		//Escribimos en la hoja en la celda B1

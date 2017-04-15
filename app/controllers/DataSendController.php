@@ -159,33 +159,28 @@ class DataSendController extends \BaseController {
 		}
 		fwrite($fichero,json_encode($aRequest));
 		fclose($fichero);
-
-<<<<<<< HEAD
-=======
 //require 'vendor/autoload.php';
 
->>>>>>> origin/master
+
 
 
 		//$m = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 		$m = new MongoClient();//obsoleta desde mongo 1.0.0
-<<<<<<< HEAD
+
 		//
 	//	$m = new MongoDB\Client();
-=======
 		//$m = new MongoDB\Client();
->>>>>>> origin/master
+
 		$db = $m->formSendit2;
 
 		$collection = $db->DataFormTest;
 		//var_dump($collection);
 		//require 'vendor/autoload.php';
 		 $doc = $collection->insert($aRequest);
-<<<<<<< HEAD
+
 		echo "doc insertado";
-=======
 		 echo "doc insertado";
->>>>>>> origin/master
+
 
 		 $email = $aRequest['Entry']['UserEmail'];
 		echo $email;
