@@ -1,8 +1,8 @@
 <?php
 		$m = new MongoClient();
-		$db = $m->formSendit2;
-		$collection = $db->DataFormTest;
-		$docSendit = $collection->find();
+		$db = $m->SenditForm;
+		$collWorks = $db->Works;
+		$docsWorks = $collWorks->find();
 		//foreach ($docSendit as $row) {
 			# code...
 			//print_r($docSendit);
@@ -37,7 +37,7 @@
 		</thead>
 		<tbody>
 			<?php
-			foreach ($docSendit as $row) {
+			foreach ($docsWorks as $row) {
 				?>
 				<tr>
 
