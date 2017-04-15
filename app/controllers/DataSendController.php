@@ -171,15 +171,93 @@ class DataSendController extends \BaseController {
 	//	$m = new MongoDB\Client();
 		//$m = new MongoDB\Client();
 
+
 		$db = $m->formSendit2;
 
-		$collection = $db->DataFormTest;
+		$db = $m->SenditForm;
+
+
+		$collWorks = $db->Works;
 		//var_dump($collection);
 		//require 'vendor/autoload.php';
+
 		 $doc = $collection->insert($aRequest);
 
 		echo "doc insertado";
 		 echo "doc insertado";
+
+
+		$Work = $aRequest['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+		$Sub_W = $aRequest['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+		/*if ($collection->count() > 0) {
+			$docSendit = $collection->find(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]);
+			if ($docSendit->count() > 0) {
+				# update
+				//$newSubW = $aRequest($set => ['Entry.AnswersJson.Trabajos_planificados2.Trabajos'] => $Sub_W );
+				//$updateResult = $collection->update(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work], $newSubW);
+				/*$updateResult = $collection->update(
+			    ['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work],
+			    [ '$set' => ['Entry.AnswersJson.Trabajos_planificados2.Sub_trabajo' => $Sub_W]]
+			);
+
+				var_dump($collection->find(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]));
+				echo "Trabajo updated";
+
+			}else{
+				$doc = $collection->insert($aRequest);
+		 		echo "Trabajo nuevo insertado";
+			}
+		}else{
+			$doc = $collection->insert($aRequest);
+		 	echo "Coleccion vacia nuevo trabajo insertado";
+		}*/
+		$docWork = $collWorks->findOne(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]);
+		//var_dump($docWork);
+		$work = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+		//echo $work;
+		if ($docWork){
+			# code...
+			//$docSendit = $collection->find(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]);
+			$IdForm = $docWork['Entry']['Id'];//get id de Works collection
+			$collSubWorks = $db->SubWorks;//create collection
+
+			$docSubWs = $collSubWorks->insert($aRequest);
+			//$subws = $collSubWorks->find();
+			$updateResult = $collSubWorks->update(
+				['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $work],
+				[ '$set' => ['Entry.Id' => $IdForm]],
+				['multiple' => true]
+			);
+			/*foreach ($subws as $subw) {
+				$updateResult = $subw->update(
+			    ['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $work],
+			    [ '$set' => ['Entry.Id' => $IdForm]]
+			);
+			$work = $subw['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+			echo $work;
+			//echo $subW->Entry->AnswersJson->Trabajos_planificados2->Trabajos;
+
+			}
+			/*for($i=0;$i<count($subws);$i++){
+				$id_fruta=$subws[$i]->Entry->AnswersJson->Trabajos_planificados2->Trabajos;
+
+			    echo $id_fruta;
+			}*/
+
+			echo "doc insertado en SubWs collection";
+		}else{
+
+		$docWork = $collWorks->insert($aRequest);
+		//$indexName = $collection->createIndex(['borough' => 1, 'cuisine' => 1]);
+		echo "doc insertado en Works collection";
+
+		}
+
+
+		//$doc = $collection->insert($aRequest);
+		//echo "doc insertado";
+
+		 //$email = $aRequest['Entry']['UserEmail'];
 
 
 		 $email = $aRequest['Entry']['UserEmail'];

@@ -52,45 +52,79 @@ class ExcelController extends \BaseController {
 		//include 'PHPExcel/IOFactory.php';
 		// Creamos un objeto PHPExcel
 		$m = new MongoClient();
-		$db = $m->formSendit2;
-		$collection = $db->DataFormTest;
-		$docSendit = $collection->findOne(['Entry.Id' => $id]);
-		//echo "hola 1";
-		//var_dump($docSendit);
-		//echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
-		$StartTime = $docSendit['Entry']['StartTime'];
-		$UserFirstName =$docSendit['Entry']['UserFirstName'];
-		$UserLastName = $docSendit['Entry']['UserLastName'];
-		$mantencion_equipos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
-		$Trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
-		$Sub_trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
-		$Sistema_bloqueo = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
-		$fecha_inicio_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
-		$fecha_termino_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
-		$fecha_inicio_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
-		$fecha_termino_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
-		$porcentaje_avance_fisico = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
-		$observaciones = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];
-		//echo "hola".$docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
+		$db = $m->SenditForm;
+		$collWorks = $db->Works;
+		$docWork = $collWorks->findOne(['Entry.Id' => $id]);//con id que viene de la view index
+		//get field of works collec
+		$StartTime = $docWork['Entry']['StartTime'];
+		$UserFirstName =$docWork['Entry']['UserFirstName'];
+		$UserLastName = $docWork['Entry']['UserLastName'];
+		$mantencion_equipos = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
+		$Trabajos = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+		$Sub_trabajos = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+		$Sistema_bloqueo = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
+		$fecha_inicio_prog = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
+		$fecha_termino_prog = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
+		$fecha_inicio_real = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
+		$fecha_termino_real = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
+		$porcentaje_avance_fisico = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
+		$observaciones = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];
+
 		$objPHPExcel = new PHPExcel();
 		// Leemos un archivo Excel 2007
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+
 		$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudelEmpty.xlsx");
+
+		try {
+			$objPHPExcel = $objReader->load("public/reports/reporteRudelEmpty.xlsx");
+		} catch (Exception $e) {
+			$objPHPExcel = $objReader->load("/var/www/public/reports/reporteRudelEmpty.xlsx");
+			//echo "se capturo excep";
+		}
+
+
 		// Indicamos que se pare en la hoja uno del libro
 		$objPHPExcel->setActiveSheetIndex(0);
-		//Escribimos en la hoja en la celda B1
 		$objPHPExcel->getActiveSheet()->SetCellValue('C11', $Sistema_bloqueo);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C14', $fecha_inicio_prog);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C15', $fecha_termino_prog);
 		$objPHPExcel->getActiveSheet()->SetCellValue('F14', $fecha_inicio_real);
 		$objPHPExcel->getActiveSheet()->SetCellValue('F15', $fecha_termino_real);
-		$objPHPExcel->getActiveSheet()->SetCellValue('C19', $Trabajos);
+	$objPHPExcel->getActiveSheet()->SetCellValue('C19', $Trabajos);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C20', $Sub_trabajos);
 		$objPHPExcel->getActiveSheet()->getStyle('C20')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 		$objPHPExcel->getActiveSheet()->SetCellValue('D20', $fecha_inicio_real);
 		$objPHPExcel->getActiveSheet()->SetCellValue('E20', $fecha_termino_real);
 		$objPHPExcel->getActiveSheet()->SetCellValue('F20', $porcentaje_avance_fisico."%");
 		$objPHPExcel->getActiveSheet()->SetCellValue('C35', $observaciones);
+
+		$db = $m->SenditForm;
+		$collSubWorks = $db->SubWorks;
+		$docsSubworks = $collSubWorks->find(['Entry.Id' => $id]);
+		//echo "hola 1";
+		if ($docsSubworks->count() > 0) {
+			$row = 21;
+			foreach ($docsSubworks as $subw) {
+				$subw = $subw['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+				//var_dump($subw);
+				//echo "hola";
+
+
+				$objPHPExcel->getActiveSheet()->SetCellValue('C'.(string)($row), $subw);
+				$objPHPExcel->getActiveSheet()->getStyle('C'.(string)($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+				$row ++;
+			}
+		}else{
+			echo "no hay doc en Subworks collec con Id: ".$id;
+		}
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
+		header("Cache-Control: max-age=0");
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		$objWriter->save("ReportOut.xlsx");
+		$objWriter->save("php://output");
+
 		// Color rojo al texto
 		/*$objPHPExcel->getActiveSheet()->getStyle('B2')->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
 		// Texto alineado a la derecha
@@ -98,19 +132,14 @@ class ExcelController extends \BaseController {
 		// Damos un borde a la celda
 		$objPHPExcel->getActiveSheet()->getStyle('B2')->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
 		$objPHPExcel->getActiveSheet()->getStyle('B2')->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
-		$objPHPExcel->getActiveSheet()->getStyle('B2')->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);*/
+		$objPHPExcel->getActiveSheet()->getStyle('B2')->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
+		*/
 		//Guardamos el archivo en formato Excel 2007
 		//Si queremos trabajar con Excel 2003, basta cambiar el 'Excel2007' por 'Excel5' y el nombre del archivo de salida cambiar su formato por '.xls'
-
 		//header('Content-type: application/vnd.ms-excel');excel 2003
 		//PARA DESCARGAR EXCEL
 		//RETIRAR ECHO O HACERLO EN UN ARCHIVO APARTE
-		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-		header("Cache-Control: max-age=0");
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-		$objWriter->save("ReportOut.xlsx");
-		$objWriter->save("php://output");
+
 		//
 		//echo "hola excel";
 		//global $id;
