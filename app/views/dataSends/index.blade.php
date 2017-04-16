@@ -3,19 +3,16 @@
 		$db = $m->SenditForm;
 		$collWorks = $db->Works;
 		$docsWorks = $collWorks->find();
-		//foreach ($docSendit as $row) {
-			# code...
-			//print_r($docSendit);
-			//echo $row->Entry->UserEmail;
-	//	}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>hola kalza</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-	<table>
+	<table id= "lista-crud" class="table table-striped table-condensed listar-act">
 		<thead>
 			<tr>
 
@@ -39,7 +36,11 @@
 				?>
 				<tr>
 
-					<td><?php echo $row['Entry']['StartTime']?></td>
+					<td><?php
+					$startTime = new DateTime($row['Entry']['StartTime']);
+					echo date_format($startTime, 'd/m/Y H:i:s')
+						?>
+					</td>
 					<td><?php echo $row['Entry']['UserFirstName'].$row['Entry']['UserLastName']?></td>
 					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK']?></td>
 					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK']?></td>
@@ -48,7 +49,7 @@
 					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED']?></td>
 
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
-					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Informe</a></td>
+					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Contenido</a></td>
 				</tr>
 				<?php
 			}

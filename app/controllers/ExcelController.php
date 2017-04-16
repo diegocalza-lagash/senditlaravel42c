@@ -66,8 +66,13 @@ class ExcelController extends \BaseController {
 		$fecha_termino_prog = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'];
 		$fecha_inicio_real = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'];
 		$fecha_termino_real = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'];
+
 		$porcentaje_avance_fisico = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'];
 		$observaciones = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS'];
+		$s_t_day = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['S_TURN_DAY'];
+		$s_t_night = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['S_TURN_NIGHT'];
+		$i_p_day = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['I_P_TURN_DAY'];
+		$i_p_night = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['I_P_TURN_NIGHT'];
 
 		$objPHPExcel = new PHPExcel();
 		// Leemos un archivo Excel 2007
@@ -88,15 +93,21 @@ class ExcelController extends \BaseController {
 		$objPHPExcel->getActiveSheet()->SetCellValue('C11', $Sistema_bloqueo);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C14', $fecha_inicio_prog);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C15', $fecha_termino_prog);
-		$objPHPExcel->getActiveSheet()->SetCellValue('F14', $fecha_inicio_real);
-		$objPHPExcel->getActiveSheet()->SetCellValue('F15', $fecha_termino_real);
+		//$objPHPExcel->getActiveSheet()->SetCellValue('F14', $fecha_inicio_real);
+		//$objPHPExcel->getActiveSheet()->SetCellValue('F15', $fecha_termino_real);
 	$objPHPExcel->getActiveSheet()->SetCellValue('C19', $Trabajos);
 		$objPHPExcel->getActiveSheet()->SetCellValue('C20', $Sub_trabajos);
 		$objPHPExcel->getActiveSheet()->getStyle('C20')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-		$objPHPExcel->getActiveSheet()->SetCellValue('D20', $fecha_inicio_real);
-		$objPHPExcel->getActiveSheet()->SetCellValue('E20', $fecha_termino_real);
+		$fecha_inicio_real = new DateTime($fecha_inicio_real);
+		$objPHPExcel->getActiveSheet()->SetCellValue('D20', date_format($fecha_inicio_real, 'd/m/Y H:i:s'));
+		$fecha_termino_real = new DateTime($fecha_termino_real);
+		$objPHPExcel->getActiveSheet()->SetCellValue('E20', date_format($fecha_termino_real, 'd/m/Y H:i:s'));
 		$objPHPExcel->getActiveSheet()->SetCellValue('F20', $porcentaje_avance_fisico."%");
 		$objPHPExcel->getActiveSheet()->SetCellValue('C35', $observaciones);
+		$objPHPExcel->getActiveSheet()->SetCellValue('F9', $s_t_day);
+		$objPHPExcel->getActiveSheet()->SetCellValue('F10', $s_t_night);
+		$objPHPExcel->getActiveSheet()->SetCellValue('F11', $i_p_day);
+		$objPHPExcel->getActiveSheet()->SetCellValue('F12', $i_p_night);
 
 		$db = $m->SenditForm;
 		$collSubWorks = $db->SubWorks;
@@ -106,6 +117,7 @@ class ExcelController extends \BaseController {
 			$row = 21;
 			foreach ($docsSubworks as $subw) {
 				$subw = $subw['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
+				//$poop = $subw['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'];
 				//var_dump($subw);
 				//echo "hola";
 
@@ -113,6 +125,26 @@ class ExcelController extends \BaseController {
 				$objPHPExcel->getActiveSheet()->SetCellValue('C'.(string)($row), $subw);
 				$objPHPExcel->getActiveSheet()->getStyle('C'.(string)($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 				$row ++;
+			}
+			$row=21;
+			foreach ($docsSubworks as $date_start_r) {
+				$date_start_r = $date_start_r['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'];
+				$date_start_r = new DateTime($date_start_r);
+				$objPHPExcel->getActiveSheet()->SetCellValue('D'.(string)($row), date_format($date_start_r, 'd/m/Y H:i:s'));
+				$row++;
+			}
+			$row=21;
+			foreach ($docsSubworks as $date_end_r) {
+				$date_end_r = $date_end_r['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'];
+				$date_end_r = new DateTime($date_end_r);
+				$objPHPExcel->getActiveSheet()->SetCellValue('E'.(string)($row), date_format($date_end_r, 'd/m/Y H:i:s'));
+				$row++;
+			}
+			$row=21;
+			foreach ($docsSubworks as $poop) {
+				$poop = $poop['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'];
+				$objPHPExcel->getActiveSheet()->SetCellValue('F'.(string)($row), $poop."%");
+				$row++;
 			}
 		}else{
 			//echo "no hay doc en Subworks collec con Id: ".$id;
