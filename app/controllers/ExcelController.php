@@ -162,26 +162,6 @@ class ExcelController extends \BaseController {
 				$collection = $db->DataFormTest;
 				$docSendit = $collection->findOne(['Entry.Id' => $id]);
 
-				$StartTime = $docSendit['Entry']['StartTime'];
-				$UserFirstName =$docSendit['Entry']['UserFirstName'];
-				$UserLastName = $docSendit['Entry']['UserLastName'];
-				$mantencion_equipos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
-				$Trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
-				$Sub_trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
-				$Sistema_bloqueo = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
-				$fecha_inicio_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
-				$fecha_termino_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
-				$fecha_inicio_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
-				$fecha_termino_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
-				$porcentaje_avance_fisico = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
-				$observaciones = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];
-
-				$data = array(
-					    	array($StartTime, 'data2'),
-					    	array('data3', 'data4')
-							);
-				$sheet->with($data);
-
 			});
 
 		})->export('xls');*/
