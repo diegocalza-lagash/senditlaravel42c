@@ -60,64 +60,7 @@ class DataSendController extends \BaseController {
 	public function report($id){
 
 
-		//echo "hola report: ".$id;
-		//$m = new MongoDB\Client();
-		//$db = $m->formSendit2;
-		//$collection = $db->DataFormTest;
-		//$docSendit = $collection->find(['ProviderId' => $id]);
-		//$db->users->find(array("age" => array('$gt' => 33, '$lte' => 40)));
-		//$docSendit = $collection->findOne(['Entry.Id' => $id]);
 
-		//echo "pase";
-		//print_r($docSendit);
-		//var_dump($docSendit);
-		/*echo $docSendit['Entry']['StartTime'];
-		echo $docSendit['Entry']['UserFirstName'].$docSendit['Entry']['UserLastName'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
-		echo $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];*/
-
-		/* $StartTime = $docSendit['Entry']['StartTime'];
-		 $UserFirstName =$docSendit['Entry']['UserFirstName'];
-		 $UserLastName = $docSendit['Entry']['UserLastName'];
-		 $mantencion_equipos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
-		 $Trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
-		 $Sub_trabajos = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
-		 $Sistema_bloqueo = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
-		 $fecha_inicio_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
-		 $fecha_termino_prog = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
-		 $fecha_inicio_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
-		 $fecha_termino_real = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
-		 $porcentaje_avance_fisico = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
-		 $observaciones = $docSendit['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];
-
-		Excel::create("report2",function($excel){
-
-			$excel->sheet('kalza',function($sheet){
-				//$UserFirstName =$docSendit['Entry']['UserFirstName'];
-				$data=[];
-				array_push($data, array(
-							array('data1', 'data2'),
-					    	array('data3', 'data4')));
-				/*$data = array(
-					    	array('data1', 'data2'),
-					    	array('data3', 'data4')
-							);
-
-				$sheet->with($data);
-
-			});
-
-		})->export('xls');*/
-
-		//return View::make('dataSends.index');
 	}
 
 
