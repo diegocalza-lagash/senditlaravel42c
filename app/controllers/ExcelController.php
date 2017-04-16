@@ -59,16 +59,15 @@ class ExcelController extends \BaseController {
 		$StartTime = $docWork['Entry']['StartTime'];
 		$UserFirstName =$docWork['Entry']['UserFirstName'];
 		$UserLastName = $docWork['Entry']['UserLastName'];
-		$mantencion_equipos = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['mantencion_equipos'];
-		$Trabajos = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
-		$Sub_trabajos = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
-		$Sistema_bloqueo = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Sistema_bloqueo'];
-		$fecha_inicio_prog = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_prog'];
-		$fecha_termino_prog = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_prog'];
-		$fecha_inicio_real = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_inicio_real'];
-		$fecha_termino_real = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['fecha_termino_real'];
-		$porcentaje_avance_fisico = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['porcentaje_avance_fisico'];
-		$observaciones = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['observaciones'];
+		$Trabajos = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
+		$Sub_trabajos = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
+		$Sistema_bloqueo = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM'];
+		$fecha_inicio_prog = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED'];
+		$fecha_termino_prog = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'];
+		$fecha_inicio_real = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'];
+		$fecha_termino_real = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'];
+		$porcentaje_avance_fisico = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'];
+		$observaciones = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS'];
 
 		$objPHPExcel = new PHPExcel();
 		// Leemos un archivo Excel 2007
@@ -106,7 +105,7 @@ class ExcelController extends \BaseController {
 		if ($docsSubworks->count() > 0) {
 			$row = 21;
 			foreach ($docsSubworks as $subw) {
-				$subw = $subw['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+				$subw = $subw['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
 				//var_dump($subw);
 				//echo "hola";
 

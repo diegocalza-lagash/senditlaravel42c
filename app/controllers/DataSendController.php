@@ -187,8 +187,10 @@ class DataSendController extends \BaseController {
 		// echo "doc insertado";
 
 
-		$Work = $aRequest['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
-		$Sub_W = $aRequest['Entry']['AnswersJson']['Trabajos_planificados2']['Sub_trabajos'];
+		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
+		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
+		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
+		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
 		/*if ($collection->count() > 0) {
 			$docSendit = $collection->find(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]);
 			if ($docSendit->count() > 0) {
@@ -211,9 +213,9 @@ class DataSendController extends \BaseController {
 			$doc = $collection->insert($aRequest);
 		 	echo "Coleccion vacia nuevo trabajo insertado";
 		}*/
-		$docWork = $collWorks->findOne(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]);
+		$docWork = $collWorks->findOne(['Entry.AnswersJson.ADD_WORK_PAGE.WORK' => $Work]);
 		//var_dump($docWork);
-		$work = $docWork['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
+		$work = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
 		//echo $work;
 		if ($docWork){
 			# code...
@@ -224,7 +226,7 @@ class DataSendController extends \BaseController {
 			$docSubWs = $collSubWorks->insert($aRequest);
 			//$subws = $collSubWorks->find();
 			$updateResult = $collSubWorks->update(
-				['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $work],
+				['Entry.AnswersJson.ADD_WORK_PAGE.WORK' => $work],
 				[ '$set' => ['Entry.Id' => $IdForm]],
 				['multiple' => true]
 			);
