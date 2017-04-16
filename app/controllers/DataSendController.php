@@ -181,10 +181,10 @@ class DataSendController extends \BaseController {
 		//var_dump($collection);
 		//require 'vendor/autoload.php';
 
-		 $doc = $collection->insert($aRequest);
+		// $doc = $collection->insert($aRequest);
 
-		echo "doc insertado";
-		 echo "doc insertado";
+		//echo "doc insertado";
+		// echo "doc insertado";
 
 
 		$Work = $aRequest['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
@@ -260,8 +260,8 @@ class DataSendController extends \BaseController {
 		 //$email = $aRequest['Entry']['UserEmail'];
 
 
-		 $email = $aRequest['Entry']['UserEmail'];
-		echo $email;
+		 //$email = $aRequest['Entry']['UserEmail'];
+		//echo $email;
 
 
 		/*$providerId = $aRequest['ProviderId'];//id del proveedor del json entrante

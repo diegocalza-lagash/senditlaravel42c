@@ -74,12 +74,12 @@ class ExcelController extends \BaseController {
 		// Leemos un archivo Excel 2007
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 
-		$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudelEmpty.xlsx");
+//		$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudelEmpty.xlsx");
 
 		try {
 			$objPHPExcel = $objReader->load("public/reports/reporteRudelEmpty.xlsx");
 		} catch (Exception $e) {
-			$objPHPExcel = $objReader->load("/var/www/public/reports/reporteRudelEmpty.xlsx");
+			$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudelEmpty.xlsx");
 			//echo "se capturo excep";
 		}
 
@@ -116,7 +116,7 @@ class ExcelController extends \BaseController {
 				$row ++;
 			}
 		}else{
-			echo "no hay doc en Subworks collec con Id: ".$id;
+			//echo "no hay doc en Subworks collec con Id: ".$id;
 		}
 		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
