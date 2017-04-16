@@ -37,8 +37,8 @@
 				<tr>
 
 					<td><?php
-					$startTime = new DateTime($row['Entry']['StartTime']);
-					echo date_format($startTime, 'd/m/Y H:i:s')
+					$startTime = new DateTime($row['Entry']['StartTime'], new DateTimeZone('America/Santiago'));
+					echo date_format($startTime, 'j F, Y, g:i a')
 						?>
 					</td>
 					<td><?php echo $row['Entry']['UserFirstName'].$row['Entry']['UserLastName']?></td>
