@@ -176,18 +176,11 @@ class DataSendController extends \BaseController {
 		echo "doc insertado en Works collection";
 
 		}
-
-
 		//$doc = $collection->insert($aRequest);
 		//echo "doc insertado";
-
 		 //$email = $aRequest['Entry']['UserEmail'];
-
-
 		 //$email = $aRequest['Entry']['UserEmail'];
 		//echo $email;
-
-
 		/*$providerId = $aRequest['ProviderId'];//id del proveedor del json entrante
 		$docSendit = $collection->findOne(['ProviderId' => $providerId]);
 		echo "mostrando email de la bdmongo: ".$docSendit['Entry']['UserEmail'];
@@ -202,7 +195,6 @@ class DataSendController extends \BaseController {
 		 //echo "mostrando id deldocumento insertado";
 		//var_dump($doc->getInsertedId());
 
-
 	/*foreach ($db->listCollections() as $collec) {
 			# code...
 			echo "mostrando colecciones";
@@ -211,7 +203,6 @@ class DataSendController extends \BaseController {
 
 
 	}
-
 
 	/**
 	 * Display the specified resource.
