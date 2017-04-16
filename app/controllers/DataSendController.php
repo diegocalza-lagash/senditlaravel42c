@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ALL);
+//require "/vendor/autoload.php";
 class Console
 {
     /**
@@ -158,19 +159,36 @@ class DataSendController extends \BaseController {
 		}
 		fwrite($fichero,json_encode($aRequest));
 		fclose($fichero);
-
 //require 'vendor/autoload.php';
+
 
 
 
 		//$m = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 		$m = new MongoClient();//obsoleta desde mongo 1.0.0
+
+		//
+	//	$m = new MongoDB\Client();
 		//$m = new MongoDB\Client();
+
+
+		$db = $m->formSendit2;
+
 		$db = $m->SenditForm;
+
 
 		$collWorks = $db->Works;
 		//var_dump($collection);
 		//require 'vendor/autoload.php';
+
+		// $doc = $collection->insert($aRequest);
+
+		//echo "doc insertado";
+		// echo "doc insertado";
+
+
+		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
+		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
 		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
 		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
 		/*if ($collection->count() > 0) {
@@ -243,6 +261,9 @@ class DataSendController extends \BaseController {
 
 		 //$email = $aRequest['Entry']['UserEmail'];
 
+
+		 //$email = $aRequest['Entry']['UserEmail'];
+		//echo $email;
 
 
 		/*$providerId = $aRequest['ProviderId'];//id del proveedor del json entrante
