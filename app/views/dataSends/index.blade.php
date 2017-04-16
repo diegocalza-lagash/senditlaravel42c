@@ -23,16 +23,14 @@
 				<th>Fecha De Envío</th>
 				<th>Enviado por</th>
 				<!--<th>Ubicación</th>-->
-				<th>Mantencion de Equipos</th>
 				<th>Trabajos</th>
 				<th>SubTrabajos</th>
 				<th>Sistema de bloqueo</th>
 				<th>Fecha De Inicio Programada</th>
 				<th>Fecha De Término Programada</th>
-				<th>Fecha De Inicio Real</th>
-				<th>Fecha De Término Real</th>
-				<th>Porcentaje De Avance Físico</th>
-				<th>Observaciones</th>
+				<!--<th>Fecha De Inicio Real</th>
+				<th>Fecha De Término Real</th>-->
+
 			</tr>
 		</thead>
 		<tbody>
@@ -48,10 +46,7 @@
 					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM']?></td>
 					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED']?></td>
 					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS']?></td>
+
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
 					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Informe</a></td>
 				</tr>

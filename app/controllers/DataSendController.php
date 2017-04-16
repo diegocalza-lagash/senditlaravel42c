@@ -172,7 +172,7 @@ class DataSendController extends \BaseController {
 		//var_dump($collection);
 		//require 'vendor/autoload.php';
 		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
-		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['Sub_trabajos'];
+		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
 		/*if ($collection->count() > 0) {
 			$docSendit = $collection->find(['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $Work]);
 			if ($docSendit->count() > 0) {
