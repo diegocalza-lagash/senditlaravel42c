@@ -38,7 +38,7 @@
 
 					<td><?php
 					$startTime = new DateTime($row['Entry']['StartTime']);
-					//$startTime->setTimezone(new DateTimeZone('America/Santiago'));
+					$startTime->setTimezone(new DateTimeZone('America/Santiago'));
 					echo $startTime->format('j F, Y, g:i a');
 						?>
 					</td>
