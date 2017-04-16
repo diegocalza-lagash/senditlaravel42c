@@ -84,7 +84,7 @@ class DataSendController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+
 	//echo "holapost"." ";
 		//ob_start();
 		$aRequest = json_decode(file_get_contents('php://input'),true);
