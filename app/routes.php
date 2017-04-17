@@ -17,9 +17,12 @@ Route::get('/', function()
 });
 Route::resource('data','DataSendController');
 Route::controller('dataform','DataSendController');
-Route::get('/', function()
+//Route::get('dataform', array('uses' => 'DataSendController@showWorks'));
+/*Route::get('dataform', function()
 {
-	return View::make('dataform');
-});
+
+	return View::make('dataSends.index');
+});*/
 Route::get('report/{id}', 'DataSendController@report');
+//Route::get('list-works', 'DataSendController@showWorks');
 Route::resource('excel','ExcelController');

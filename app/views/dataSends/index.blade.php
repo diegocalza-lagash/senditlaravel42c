@@ -1,10 +1,10 @@
 <?php
-		$m = new MongoClient();
+		$m = new MongoClient();//obsoleta desde mongo 1.0.0
 		$db = $m->SenditForm;
-		$collWorks = $db->Works;
-		$docsWorks = $collWorks->find();
-
+		$collRepor = $db->Repor;
+		$docRepor = $collRepor->find();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,23 +19,26 @@
 
 				<th>Fecha De Envío</th>
 				<th>Enviado por</th>
-				<!--<th>Ubicación</th>-->
-				<th>Trabajos</th>
-				<th>SubTrabajos</th>
+				<th>Ubicación</th>
+				<th>Equipo</th>
+				<th>Identificación Equipo</th>
 				<th>Sistema de bloqueo</th>
+				<th>Trabajo</th>
+				<th>SubTrabajo</th>
 				<th>Fecha De Inicio Programada</th>
 				<th>Fecha De Término Programada</th>
-				<!--<th>Fecha De Inicio Real</th>
-				<th>Fecha De Término Real</th>-->
+				<th>Fecha De Inicio Real</th>
+				<th>Fecha De Término Real</th>
+				<th>Avance</th>
+				<th>Observaciones</th>
 
 			</tr>
 		</thead>
 		<tbody>
 			<?php
-			foreach ($docsWorks as $row) {
+			foreach ($docRepor as $row) {
 				?>
 				<tr>
-
 					<td><?php
 					$startTime = new DateTime($row['Entry']['StartTime']);
 					$startTime->setTimezone(new DateTimeZone('America/Santiago'));
@@ -43,11 +46,18 @@
 						?>
 					</td>
 					<td><?php echo $row['Entry']['UserFirstName'].$row['Entry']['UserLastName']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED']?></td>
-					<td><?php echo $row['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED']?></td>
+					<td><?php echo $row['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME']?></td>
+					<td><?php echo $row['EQUIPMENT']['EQUIPMENT_NAME']?></td>
+					<td><?php echo $row['EQUIPMENT']['IDENTIFICATION_EQUIPMENT']['IDENTIFICATION_NAME']?></td>
+					<td><?php echo $row['EQUIPMENT']['BLOCK_SYSTEM']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['WORK_NAME']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME']?></td>
+					<td><?php echo $row['EQUIPMENT']['DATE_START_PROGRAMMED']?></td>
+					<td><?php echo $row['EQUIPMENT']['DATE_END_PROGRAMMED']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['POOP']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']?></td>
 
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
 					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Contenido</a></td>
