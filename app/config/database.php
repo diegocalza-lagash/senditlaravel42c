@@ -27,6 +27,7 @@ return array(
 	*/
 
 	'default' => 'mysql',
+	//'default' => env('DB_CONNECTION', 'mongodb'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -82,6 +83,7 @@ return array(
 			'password' => '',
 			'prefix'   => '',
 		),
+
 
 	),
 

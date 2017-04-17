@@ -43,18 +43,22 @@ class DataSendController extends \BaseController {
 	 */
 	public function getIndex()
 	{
-		//
 		//echo "hola";
-		/*$m = new MongoDB\Client();
-		$db = $m->formSendit2;
-		$collection = $db->DataFormTest;
-		$docSendit = $collection->find();
-		foreach ($docSendit as $row) {
-			# code...
-			//print_r($row);
-			echo $row->Entry->UserEmail;
-		}*/
 		return View::make('dataSends.index');
+	}
+
+	public function showWorks()
+	{
+				/*echo "hola";
+				$m = new MongoClient();
+				$db = $m->SenditForm;
+				$collWorks = $db->Works;
+				$docsWorks = $collWorks->find();
+				//$docsWorks = Work::all();
+
+				return View::make('listworks', array('dataform' => $docsWorks));
+		//return View::make('dataSends.index')->with('dataform', $docsWorks);
+		//return Redirect::to('dataform');*/
 
 	}
 	public function report($id){
@@ -85,30 +89,77 @@ class DataSendController extends \BaseController {
 	public function store()
 	{
 
-	//echo "holapost"." ";
-		//ob_start();
 		$aRequest = json_decode(file_get_contents('php://input'),true);
-		//print_r($aRequest);
-		//echo $aRequest['Entry']['UserEmail'];
-		/*foreach($aRequest as $obj){
-	        $email = $obj->Entry->UserEmail;
-	        //$mantencion_equipos = $obj->AnswersJson->Trabajos_planificados2->mantencion_equipos;
-	        echo $email;//." ".$mantencion_equipos." ";
-		}*/
-		//echo "hola again";
 		$fichero=fopen('test.log','w');
 	 		if($fichero == false) {
    			die("No se ha podido crear el archivo.");
 		}
 		fwrite($fichero,json_encode($aRequest));
 		fclose($fichero);
-//require 'vendor/autoload.php';
-		//$m = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-		$m = new MongoClient();//obsoleta desde mongo 1.0.0
-		$db = $m->formSendit2;
-		$db = $m->SenditForm;
-		$collWorks = $db->Works;
 
+		$array = array(
+			"ProviderId" => $aRequest['ProviderId'],
+			"IntegrationKey" => $aRequest['IntegrationKey'],
+			"Entry" => array(
+				 "Id" => $aRequest['Entry']['Id'],
+				 "FormCode" => $aRequest['Entry']['FormCode'],
+				 "FormVersion" => $aRequest['Entry']['FormVersion'],
+				 "UserFirstName" => $aRequest['Entry']['UserFirstName'],
+				 "UserLastName" => $aRequest['Entry']['UserLastName'],
+				 "UserEmail" => $aRequest['Entry']['UserEmail'],
+				 "Latitude" => $aRequest['Entry']['Latitude'],
+				 "Longitude" => $aRequest['Entry']['Longitude'],
+				 "StartTime" => $aRequest['Entry']['StartTime'],
+				 "ReceivedTime" => $aRequest['Entry']['ReceivedTime'],
+				 "CompleteTime" => $aRequest['Entry']['CompleteTime']
+				),
+			"EQUIPMENT" => array(
+				"EQUIPMENT_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT'],
+				"IDENTIFICATION_EQUIPMENT" => array(
+					"IDENTIFICATION_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT']
+					),
+				"LOCALIZATION_EQUIPMENT" => array(
+					"LOCALIZATION_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['LOCALIZATION_EQUIPMENT']
+					),
+				"BLOCK_SYSTEM" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM'],
+				"DATE_START_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED'],
+				"DATE_END_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'],
+				"WORK" =>  array(
+					"WORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'],
+					"SUBWORK" => array(
+						"SUBWORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'],
+						"DATE_START_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'],
+						"DATE_END_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'],
+						"POOP" => "60",
+						"OBSERVATIONS" =>  $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS']
+						),
+					"TURNS_PAGE" => array(
+						"S_TURN_DAY" => $aRequest['Entry']['AnswersJson']['TURNS_PAGE']['S_TURN_DAY'],
+				  		"S_TURN_NIGHT" => $aRequest['Entry']['AnswersJson']['TURNS_PAGE']['S_TURN_NIGHT'],
+				  		"I_P_TURN_DAY" => $aRequest['Entry']['AnswersJson']['TURNS_PAGE']['I_P_TURN_DAY'],
+				  		"I_P_TURN_NIGHT" => $aRequest['Entry']['AnswersJson']['TURNS_PAGE']['I_P_TURN_NIGHT']
+					),
+					"PHOTOS" => array(
+						"PHOTO1" => $aRequest['Entry']['AnswersJson']['PHOTOS']['PHOTO1'],
+						"DESCRIPTION_PHOTO1" => $aRequest['Entry']['AnswersJson']['PHOTOS']['DESCRIPTION_PHOTO1'],
+						"PHOTO2" => $aRequest['Entry']['AnswersJson']['PHOTOS']['PHOTO2'],
+						"DESCRIPTION_PHOTO2" => $aRequest['Entry']['AnswersJson']['PHOTOS']['DESCRIPTION_PHOTO2'],
+						"PHOTO3" => $aRequest['Entry']['AnswersJson']['PHOTOS']['PHOTO3'],
+						"DESCRIPTION_PHOTO3" => $aRequest['Entry']['AnswersJson']['PHOTOS']['DESCRIPTION_PHOTO3'],
+						"VIDEO" => $aRequest['Entry']['AnswersJson']['PHOTOS']['VIDEO'],
+						"DESCRIPTION_VIDEO"=> $aRequest['Entry']['AnswersJson']['PHOTOS']['DESCRIPTION_VIDEO'],
+						"NEXT_PAGE_FORM_P" => $aRequest['Entry']['AnswersJson']['PHOTOS']['NEXT_PAGE_FORM_P']
+					)
+				)
+			)
+		);
+
+		$m = new MongoClient();//obsoleta desde mongo 1.0.0
+		$db = $m->SenditForm;
+		$collRepor = $db->Repor;
+		$docRepor = $collRepor->insert($array);
+		echo "Insertado en Repor collec";
+		/*
 		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
 		$Sub_W = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'];
 		$Work = $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
@@ -134,7 +185,7 @@ class DataSendController extends \BaseController {
 		}else{
 			$doc = $collection->insert($aRequest);
 		 	echo "Coleccion vacia nuevo trabajo insertado";
-		}*/
+		}
 		$docWork = $collWorks->findOne(['Entry.AnswersJson.ADD_WORK_PAGE.WORK' => $Work]);
 		//var_dump($docWork);
 		$work = $docWork['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'];
@@ -166,7 +217,7 @@ class DataSendController extends \BaseController {
 				$id_fruta=$subws[$i]->Entry->AnswersJson->Trabajos_planificados2->Trabajos;
 
 			    echo $id_fruta;
-			}*/
+			}
 
 			echo "doc insertado en SubWs collection";
 		}else{
