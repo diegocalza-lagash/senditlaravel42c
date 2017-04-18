@@ -116,7 +116,7 @@ class DataSendController extends \BaseController {
 			"EQUIPMENT" => array(
 				"EQUIPMENT_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT'],
 				"IDENTIFICATION_EQUIPMENT" => array(
-					"IDENTIFICATION_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT']
+					"IDENTIFICATION_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['IDENTIFICATION_EQUIPMENT']
 					),
 				"LOCALIZATION_EQUIPMENT" => array(
 					"LOCALIZATION_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['LOCALIZATION_EQUIPMENT']
