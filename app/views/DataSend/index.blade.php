@@ -12,6 +12,17 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
+{{ Form::open(array('url' => 'report/show','method' => 'get')) }}
+    {{ Form::label('equipo','Equipo') }}
+    {{ Form::text('equi','Caldera') }}
+    {{ Form::label('loc','Ubicación') }}
+    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2') }}
+    {{ Form::label('iden','Identificación') }}
+    {{ Form::text('iden','Poder')}}
+    {{ Form::label('dep','FTP') }}
+    {{ Form::text('dep','15/04/2017')}}
+    {{ Form::submit('Buscar'); }}
+{{ Form::close() }}
 	<table id= "lista-crud" class="table table-striped table-condensed listar-act">
 		<thead>
 			<tr>

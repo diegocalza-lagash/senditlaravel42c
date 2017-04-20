@@ -44,7 +44,7 @@ class DataSendController extends \BaseController {
 	public function getIndex()
 	{
 		//echo "hola";
-		return View::make('dataSends.index');
+		return View::make('DataSend.index');
 	}
 
 	public function showWorks()
@@ -61,11 +61,123 @@ class DataSendController extends \BaseController {
 		//return Redirect::to('dataform');*/
 
 	}
-	public function report($id){
+	public function report(){
+		//echo "hola";
+		if (isset($_GET["equi"]))
+            {
+				$equi = htmlspecialchars(Input::get("equi"));
+				$loc = htmlspecialchars(Input::get("loc"));
+				$iden = htmlspecialchars(Input::get("iden"));
+				$dep = htmlspecialchars(Input::get("dep"));
+				$m = new MongoClient();//obsoleta desde mongo 1.0.0
+				$db = $m->SenditForm;
+				$collRepor = $db->Repor;
+				$docRepor = $collRepor->find([
+					'EQUIPMENT.EQUIPMENT_NAME' => $equi,
+					'EQUIPMENT.LOCALIZATION_EQUIPMENT.LOCALIZATION_NAME' => $loc,
+					'EQUIPMENT.IDENTIFICATION_EQUIPMENT.IDENTIFICATION_NAME' => $iden,
+					'EQUIPMENT.DATE_END_PROGRAMMED' => $dep
+					]);
+
+				if (!$docRepor -> count()) {
+					echo "Sin Trabajos";
+				}else{
+					foreach ($docRepor as $arr) {
+						$work_name = $arr['EQUIPMENT']['WORK']['WORK_NAME'];
+						$subwork_name = $arr['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME'];
+						$subwork_dsr = $arr['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL'];
+						$subwork_der = $arr['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'];
+						$subwork_poop = $arr['EQUIPMENT']['WORK']['SUBWORK']['POOP'];
+						$subwork_obs = $arr['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS'];
+						$dsp = $arr['EQUIPMENT']['DATE_START_PROGRAMMED'];
+						$dep = $arr['EQUIPMENT']['DATE_END_PROGRAMMED'];
+
+						echo '<pre>'.var_dump($work_name,$subwork_name,$subwork_poop,$dsp,$dep).'</pre>';
+						$work = new Work;
+						$work->nombre = $work_name;
+						$subwork = new Subwork;
+						$subwork->nombre = $subwork_name;
+						$subwork->fecha_inicio_real = $subwork_dsr;
+						$subwork->fecha_termino_real = $subwork_der;
+						$subwork->poop = $subwork_poop;
+						$subwork->observaciones = $subwork_obs;
+					}
+					if ($work->save() && $subwork->save()) {
+							//echo "insertado en work model and sub_work model";
+							$first = DB::table('works')->distinct()
+									->join('subworks','works.id','=','subworks.id')
+									->select('subworks.nombre');
+
+							$query = DB::table('works')->distinct()
+									->join('subworks','works.id','=','subworks.id')
+									->select('works.nombre')
+									->union($first)
+									->get();
+							foreach ($query as $q) {
+								var_dump($q->nombre);
+							}
+
+
+						}
+
+
+					//var_dump(iterator_to_array($docRepor,true));
+					//$docReporArray = iterator_to_array($docRepor,false);
+					/*for ($i=0; $i<count($docReporArray); $i++) {
+						$work_name = $docReporArray[$i]['EQUIPMENT']['WORK']['WORK_NAME'];
+						$work_name_next = $docReporArray[$i+1]['EQUIPMENT']['WORK']['WORK_NAME'];
+						if ($work_name == $work_name_next ) {
+							$work = new Work;
+							$work->nombre = $work_name;
+							$subwork = new Subwork;
+							$subwork->nombre = $docReporArray[$i+1]['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME'];
+							if ($work->save() && $subwork->save()) {
+								echo "trabajo insertado";
+							}
+						}
+					}*//*foreach ($docReporArray as $key => $arr) {
+						$work_name = $arr['EQUIPMENT']['WORK']['WORK_NAME'];
+						$work_name_next = $arr['EQUIPMENT']['WORK']['WORK_NAME'];
+						echo "{$key} => {$work_name} ";
+						var_dump($docReporArray);
+					}*/
+					//echo "{$i} => {$work_name} ";
+					//$key = array_search(40489, array_column($userdb, 'uid'));
+					/*for ($i=0; $i<count($docReporArray); $i++) {
+						//$keys = array_keys($docReporArray);
+						$work_name = $docReporArray[$i]['EQUIPMENT']['WORK']['WORK_NAME'];
+						$key = array_search($work_name, $docReporArray);
 
 
 
-	}
+
+					}echo $key;*/
+						//print $keys [1];
+						//var_dump((array_keys($docReporArray)));
+
+
+
+						/*$identificacion = $docRepor['EQUIPMENT']['IDENTIFICATION_EQUIPMENT']['IDENTIFICATION_NAME'];
+						$localization = $docRepor['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME'];
+
+						$work = $docRepor['EQUIPMENT']['WORK']['WORK_NAME'];
+						$sub_work = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME'];
+						$date_start_real = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL'];
+						$date_end_real = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'];
+						$poop = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['POOP'];
+						$obs = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS'];*/
+
+					}
+
+
+					//return View::make('DataSend.report',array("docRepor" => $docRepor));
+
+				}
+
+            }
+
+		//return View::make('DataSend.report',array("docRepor" => $docRepor));
+
 
 
 	/**
@@ -200,14 +312,14 @@ class DataSendController extends \BaseController {
 			//$subws = $collSubWorks->find();
 			$updateResult = $collSubWorks->update(
 				['Entry.AnswersJson.ADD_WORK_PAGE.WORK' => $work],
-				[ '$set' => ['Entry.Id' => $IdForm]],
-				['multiple' => true]
-			);
-			/*foreach ($subws as $subw) {
-				$updateResult = $subw->update(
-			    ['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $work],
-			    [ '$set' => ['Entry.Id' => $IdForm]]
-			);
+				[ '$set' => ['Entry.Id' => $Id(Form]],
+								['multiple' => true]
+							);
+							/*foreach ($subws as $subw) {
+								$updateResult = $subw->update(
+							    ['Entry.AnswersJson.Trabajos_planificados2.Trabajos' => $work],
+							    [ '$set' => ['Entry.Id' => $IdForm]]
+							);)
 			$work = $subw['Entry']['AnswersJson']['Trabajos_planificados2']['Trabajos'];
 			echo $work;
 			//echo $subW->Entry->AnswersJson->Trabajos_planificados2->Trabajos;
