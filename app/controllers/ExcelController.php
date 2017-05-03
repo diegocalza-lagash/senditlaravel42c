@@ -41,7 +41,7 @@ class ExcelController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	/*public function show($id)
+	public function show($id)
 	{
 		//echo "id ".$id;
 		// Camino a los include

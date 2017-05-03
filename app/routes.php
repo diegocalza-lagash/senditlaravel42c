@@ -23,6 +23,6 @@ Route::controller('dataform','DataSendController');
 
 	return View::make('dataSends.index');
 });*/
-Route::get('report/{id}', 'DataSendController@report');
+Route::get('report/show', 'DataSendController@report');
 //Route::get('list-works', 'DataSendController@showWorks');
 Route::resource('excel','ExcelController');

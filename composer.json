@@ -5,11 +5,12 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-				
+
 		"maatwebsite/excel": "~1.3.0",
 		"phpexcel/phpexcel": "dev-master",
-		"mongodb/mongodb": "^1.1"
-		
+		"mongodb/mongodb": "^1.1",
+		"jenssegers/mongodb": "2.0.4"
+
 	},
 	"autoload": {
 		"classmap": [
