@@ -19,7 +19,7 @@ class CreateSubworksTable extends Migration {
             $tabla->dateTime('fecha_termino_real');
             $tabla->integer('poop');
             $tabla->longText('observaciones');
-
+            $tabla->string('works_id');
 
             $tabla->timestamps();
         });

@@ -11,7 +11,7 @@
         }
         public function subworks()
         {
-            return $this->hasMany('SubWork');
+            return $this->hasMany('Subwork');
         }
     }
 ?>
