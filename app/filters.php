@@ -49,12 +49,9 @@ App::after(function($request, $response)
 });*/
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('/');
+	if (Auth::guest()) return Redirect::guest('/login');
 });
-Route::filter('auth.user', function()
-{
-	if (Auth::guest()) return Redirect::guest('/');
-});
+
 
 Route::filter('auth.basic', function()
 {

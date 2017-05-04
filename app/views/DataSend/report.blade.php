@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>hola kalza</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
+	<a href="/download">Descargar Contenido</a></td>
 	<table id= "lista-crud" class="table table-striped table-condensed listar-act">
 		<thead>
 			<tr>
@@ -61,7 +63,6 @@
 					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']?></td>
 
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
-					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Contenido</a></td>
 				</tr>
 				<?php
 			}

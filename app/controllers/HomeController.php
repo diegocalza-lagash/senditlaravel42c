@@ -19,6 +19,16 @@ class HomeController extends BaseController {
 	{
 		return View::make('hello');
 	}
+	public function getDownload()
+	{
+	$file= "ReportOut.xlsx";
+
+    $headers = array(
+              'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            );
+
+    return Response::download($file, 'Rudel.xlsx', $headers);
+	}
 
 
 }

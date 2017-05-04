@@ -42,7 +42,7 @@ class DataSendController extends \BaseController {
 	public function getIndex()
 	{
 
-		return View::make('DataSend.index');
+		$this->layout->content = View::make('DataSend.index');
 		//return View::make('DataSend.report',array("docRepor" => $docRepor));
 	}
 
@@ -211,6 +211,7 @@ class DataSendController extends \BaseController {
 						$objWriter->save("ReportOut.xlsx");
 						$objWriter->save("php://output");
 
+
 					}
 					// si es 1 w y 4 subw
 					if (count($g['retval']) == 2 && count($g['retval'][1]['subworks']) == 20) {
@@ -261,12 +262,13 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH24', $der14);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN24', $poop14."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+						/*header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
+						header("Cache-Control: max-age=0");*/
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						//$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 
 					}
 					//si es 1 w y 5 subw
@@ -3810,10 +3812,12 @@ class DataSendController extends \BaseController {
 
 
 
-				}
+				}//else
 
 
-			}
+			}//first if
+
+			//return View::make('DataSend.report', array("docRepor" => $docRepor));
 		}
 
 

@@ -39,9 +39,11 @@ class AuthController extends BaseController {
         {
             // De ser datos válidos nos mandara a la bienvenida
             return Redirect::intended('dataform');
-            //return View::make('DataSend.index'); falla el make
+            //return View::make('DataSend.index'); //falla el make
+           // return Redirect::route('home')
+             //   ->with('flash_notice', 'You are successfully logged in.');
         }else{
-            return Redirect::to('/')
+            return Redirect::to('/login')
                     ->with('mensaje_error', 'Tus datos son incorrectos')
                     ->withInput();
         }
@@ -60,7 +62,7 @@ class AuthController extends BaseController {
     {
         Auth::logout();
         Session::flush();
-        return Redirect::to('/')
+        return Redirect::to('/login')
                     ->with('mensaje_error', 'Tu sesión ha sido cerrada.');
     }
 }
