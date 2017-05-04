@@ -4,7 +4,6 @@
 		$collRepor = $db->Repor;
 		$docRepor = $collRepor->find();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>

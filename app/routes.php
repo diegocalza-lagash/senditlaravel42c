@@ -10,19 +10,24 @@ error_reporting(E_ALL);
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+ Route::get('/', function()
+    {
+        return View::make('login');
+    });
 Route::resource('data','DataSendController');
 Route::controller('dataform','DataSendController');
-//Route::get('dataform', array('uses' => 'DataSendController@showWorks'));
-/*Route::get('dataform', function()
-{
 
-	return View::make('dataSends.index');
-});*/
 Route::get('report/show', 'DataSendController@report');
 //Route::get('list-works', 'DataSendController@showWorks');
 Route::resource('excel','ExcelController');
+// Nos mostrará el formulario de login.
+Route::get('login', 'AuthController@showLogin');
+// Validamos los datos de inicio de sesión.
+Route::post('login', 'AuthController@postLogin');
+Route::get('logout', 'AuthController@logOut');
+
+/*Route::get('dataform', array('before' => 'auth', function(){
+    return View::make('DataSend.index');
+}));*/
+
+

@@ -36,32 +36,16 @@ class Console
 
 class DataSendController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	/*public function __construct(){
+		$this->beforeFilter('auth.user');
+	}*/
 	public function getIndex()
 	{
-		//echo "hola";
+
 		return View::make('DataSend.index');
 		//return View::make('DataSend.report',array("docRepor" => $docRepor));
 	}
 
-	public function showWorks()
-	{
-				/*echo "hola";
-				$m = new MongoClient();
-				$db = $m->SenditForm;
-				$collWorks = $db->Works;
-				$docsWorks = $collWorks->find();
-				//$docsWorks = Work::all();
-
-				return View::make('listworks', array('dataform' => $docsWorks));
-		//return View::make('dataSends.index')->with('dataform', $docsWorks);
-		//return Redirect::to('dataform');*/
-
-	}
 	public function report(){
 		//echo "hola";
 		if (isset($_GET["equi"]))
