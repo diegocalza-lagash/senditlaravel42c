@@ -13,6 +13,9 @@
 </head>
 
 <body>
+					@if(Session::has('mensaje_error'))
+                        <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>
+                    @endif
 {{ Form::open(array('url' => 'report/show','method' => 'get')) }}
     {{ Form::label('equipo','Equipo') }}
     {{ Form::text('equi','Caldera') }}
@@ -24,6 +27,7 @@
     {{ Form::text('dep','15/04/2017')}}
     {{ Form::submit('Buscar'); }}
 {{ Form::close() }}
+
 	<table id= "lista-crud" class="table table-striped table-condensed listar-act">
 		<thead>
 			<tr>
