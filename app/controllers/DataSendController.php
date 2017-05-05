@@ -125,12 +125,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH21', $der11);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN21', $poop11."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//si es 1 trabajo y 2 subtrabajo
 					if (count($g['retval']) == 2 && count($g['retval'][1]['subworks']) == 10) {
@@ -159,12 +156,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH22', $der12);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN22', $poop12."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 
 					}
 					//si es un w y 3 subw
@@ -204,13 +198,10 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AB23', $dsr13);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH23', $der13);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN23', $poop13."%");
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
+
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
-
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 
 					}
 					// si es 1 w y 4 subw
@@ -331,12 +322,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH25', $der15);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN25', $poop15."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 
 					}
 					//si es un 1 w y 6 subw
@@ -410,12 +398,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH26', $der16);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN26', $poop16."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 
 					}
 					//ASCENDENTE
@@ -449,12 +434,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH23', $der21);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN23', $poop21."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					// 2 w el 1er w con 1 subwork y el 2do w con 2subw en orden
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 5 && count($g['retval'][2]['subworks']) == 10) {
@@ -497,12 +479,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH24', $der22);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN24', $poop22."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 w el 1erw con 1 subwork y el 2do w con 3subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks']) == 5 && count($g['retval'][2]['subworks']) == 15) {
@@ -556,12 +535,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH25', $der23);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN25', $poop23."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					// 2 w el 1ero con 1 subwork y el 2do w con 4subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks']) == 5 && count($g['retval'][2]['subworks']) == 20) {
@@ -625,12 +601,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AB26', $dsr24);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH26', $der24);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN26', $poop24."%");
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					// 2 w el 1ero w con 1 subwork y el 2do w con 5subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks']) == 5 && count($g['retval'][2]['subworks']) == 25) {
@@ -704,12 +677,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AB27', $dsr25);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH27', $der25);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN27', $poop25."%");
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					// 2 w el 1ero con 1 subwork y el 2do w con 6subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks']) == 5 && count($g['retval'][2]['subworks']) == 30) {
@@ -794,12 +764,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AB28', $dsr26);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH28', $der26);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN28', $poop26."%");
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W 1ero 2SUB
 					//2 W, 1ero con 2 subw y el 2do con 2 subw
@@ -856,12 +823,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH25', $der22);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN25', $poop22."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 2 subw y el 2do con 3 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 10 && count($g['retval'][2]['subworks']) == 15) {
@@ -928,12 +892,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH26', $der23);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN26', $poop23."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 2 subw y el 2do con 4 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 10 && count($g['retval'][2]['subworks']) == 20) {
@@ -1011,12 +972,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH27', $der24);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN27', $poop24."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 2 subw y el 2do con 5 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 10 && count($g['retval'][2]['subworks']) == 25) {
@@ -1105,12 +1063,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH28', $der25);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN28', $poop25."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 2 subw y el 2do con 6 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 10 && count($g['retval'][2]['subworks']) == 30) {
@@ -1210,12 +1165,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH29', $der26);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN29', $poop26."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W 1ero 3SUB
 					//2 W, 1ero con 3 subw y el 2do con 3 subw
@@ -1294,12 +1246,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH27', $der23);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN27', $poop23."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 3 subw y el 2do con 4 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 15 && count($g['retval'][2]['subworks']) == 20) {
@@ -1388,12 +1337,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH28', $der24);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN28', $poop24."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 3 subw y el 2do con 5 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 15 && count($g['retval'][2]['subworks']) == 25) {
@@ -1493,12 +1439,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH29', $der25);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN29', $poop25."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 3 subw y el 2do con 6 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 15 && count($g['retval'][2]['subworks']) == 30) {
@@ -1609,12 +1552,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH30', $der26);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN30', $poop26."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W 1ero 4Sub
 					//2 W, 1ero con 4 subw y el 2do con 4 subw
@@ -1716,12 +1656,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN29', $poop24."%");
 
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 4 subw y el 2do con 5 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 20 && count($g['retval'][2]['subworks']) == 25) {
@@ -1833,12 +1770,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN30', $poop25."%");
 
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 4 subw y el 2do con 6 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 20 && count($g['retval'][2]['subworks']) == 30) {
@@ -1962,12 +1896,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN31', $poop26."%");
 
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 5 subw y el 2do con 5 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 25 && count($g['retval'][2]['subworks']) == 25) {
@@ -2090,12 +2021,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH31', $der25);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN31', $poop25."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 5 subw y el 2do con 6 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 25 && count($g['retval'][2]['subworks']) == 30) {
@@ -2229,12 +2157,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH32', $der26);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN32', $poop26."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 6 subw y el 2do con 6 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 30 && count($g['retval'][2]['subworks']) == 30) {
@@ -2378,12 +2303,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH33', $der26);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN33', $poop26."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 
 
@@ -2431,12 +2353,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH24', $der21);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN24', $poop21."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W, 1ERO CON 3SUB EL 2DO CON 1 SUBW
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 15 && count($g['retval'][2]['subworks']) == 5) {
@@ -2495,12 +2414,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH25', $der21);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN25', $poop21."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W, 1ERO CON 4SUB EL 2DO CON 1 SUBW
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 20 && count($g['retval'][2]['subworks']) == 5) {
@@ -2568,12 +2484,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH26', $der21);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN26', $poop21."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W, 1ERO CON 5SUB EL 2DO CON 1 SUBW
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 25 && count($g['retval'][2]['subworks']) == 5) {
@@ -2652,12 +2565,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH27', $der21);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN27', $poop21."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2W, 1ERO CON 6SUB EL 2DO CON 1 SUBW
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 30 && count($g['retval'][2]['subworks']) == 5) {
@@ -2747,12 +2657,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH28', $der21);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN28', $poop21."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 3 subw y el 2do con 2 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 15 && count($g['retval'][2]['subworks']) == 10) {
@@ -2819,12 +2726,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH26', $der22);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN26', $poop22."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 4 subw y el 2do con 2 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 20 && count($g['retval'][2]['subworks']) == 10) {
@@ -2903,12 +2807,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH27', $der22);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN27', $poop22."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 5 subw y el 2do con 2 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 25 && count($g['retval'][2]['subworks']) == 10) {
@@ -2997,12 +2898,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH28', $der22);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN28', $poop22."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 6 subw y el 2do con 2 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 30 && count($g['retval'][2]['subworks']) == 10) {
@@ -3103,12 +3001,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH29', $der22);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN29', $poop22."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 4 subw y el 2do con 3 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 20 && count($g['retval'][2]['subworks']) == 15) {
@@ -3197,12 +3092,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH28', $der23);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN28', $poop23."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 5 subw y el 2do con 3 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 25 && count($g['retval'][2]['subworks']) == 15) {
@@ -3302,12 +3194,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH29', $der23);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN29', $poop23."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 6 subw y el 2do con 3 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 30 && count($g['retval'][2]['subworks']) == 15) {
@@ -3418,12 +3307,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH30', $der23);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN30', $poop23."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 5 subw y el 2do con 4 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 25 && count($g['retval'][2]['subworks']) == 20) {
@@ -3534,12 +3420,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH30', $der24);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN30', $poop24."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 6 subw y el 2do con 4 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 30 && count($g['retval'][2]['subworks']) == 20) {
@@ -3662,12 +3545,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH31', $der24);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN31', $poop24."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//2 W, 1ero con 6 subw y el 2do con 5 subw
 					if (count($g['retval']) == 3 && count($g['retval'][1]['subworks'])  == 30 && count($g['retval'][2]['subworks']) == 25) {
@@ -3800,12 +3680,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH32', $der25);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN32', $poop25."%");
 
-						header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$objWriter->save("php://output");
+						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 
 
@@ -4130,7 +4007,7 @@ class DataSendController extends \BaseController {
 								"SUBWORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'],
 								"DATE_START_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'],
 								"DATE_END_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'],
-								"POOP" => "60",
+								"POOP" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'],
 								"OBSERVATIONS" =>  $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS']
 								),
 							"TURNS_PAGE" => array(
@@ -4254,7 +4131,7 @@ class DataSendController extends \BaseController {
 								"SUBWORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'],
 								"DATE_START_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'],
 								"DATE_END_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'],
-								"POOP" => "60",
+								"POOP" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'],
 								"OBSERVATIONS" =>  $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS']
 								),
 							"TURNS_PAGE" => array(
@@ -4322,7 +4199,7 @@ class DataSendController extends \BaseController {
 								"SUBWORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'],
 								"DATE_START_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_REAL'],
 								"DATE_END_REAL" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_REAL'],
-								"POOP" => "60",
+								"POOP" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['POOP'],
 								"OBSERVATIONS" =>  $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['OBSERVATIONS']
 								),
 							"TURNS_PAGE" => array(

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-	<title>hola kalza</title>
+	<title>Trabajos</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 
@@ -82,9 +82,9 @@
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
 					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Contenido</a></td>
 				</tr>
-				<?php//foreach
+				<?php
 			}
-				?>//foreach
+				?>
 		</tbody>
 	</table>
 </body>
