@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>hola kalza</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ URL::asset('assets/css/css-table.css') }}">
 </head>
 <body>
-	<table id= "lista-crud" class="table table-striped table-condensed listar-act">
-		<thead>
+	<a href="/download">Descargar Contenido</a></td>
+	<div>
+		<table  class="table table-striped  table-condensed  listar-act ">
+		<thead >
 			<tr>
 
 				<th>Fecha De Envío</th>
@@ -23,6 +27,14 @@
 				<th>Fecha De Término Real</th>
 				<th>Avance</th>
 				<th>Observaciones</th>
+				<th>Foto 1</th>
+				<th>Descripción Foto 1</th>
+				<th>Foto 2</th>
+				<th>Descripción Foto 2</th>
+				<th>Foto 3</th>
+				<th>Descripción Foto 3</th>
+				<th>Video</th>
+				<th>Descripción Video</th>
 
 			</tr>
 		</thead>
@@ -59,14 +71,23 @@
 					?></td>
 					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['POOP']."%"?></td>
 					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO1']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['DESCRIPTION_PHOTO1']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO2']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['DESCRIPTION_PHOTO2']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO3']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['DESCRIPTION_PHOTO3']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['VIDEO']?></td>
+					<td><?php echo $row['EQUIPMENT']['WORK']['PHOTOS']['DESCRIPTION_VIDEO']?></td>
 
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
-					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Contenido</a></td>
 				</tr>
 				<?php
 			}
 				?>
 		</tbody>
 	</table>
+	</div>
+
 </body>
 </html>
