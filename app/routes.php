@@ -19,6 +19,7 @@ Route::resource('data','DataSendController');
 Route::controller('dataform','DataSendController');
 
 Route::get('report/show', 'DataSendController@report');
+
 //Route::get('list-works', 'DataSendController@showWorks');
 Route::resource('excel','ExcelController');
 // Nos mostrará el formulario de login.
@@ -42,4 +43,5 @@ Route::get('/', array('as' => 'home', function(){
 }))->before('auth');
 //for download excel
 Route::get('/download','HomeController@getDownload');
-
+//AJAX
+Route::get('/getEquipments', 'DataSendController@getEquipments');

@@ -28,9 +28,51 @@
 .header-fixed > tbody > tr > td,
 .header-fixed > thead > tr > th {
     width: 20%;
-    float: left;
+float: left;
 }*/
-table{
-    display: block;
-    overflow: scroll;
+
+/*div.dataTables_wrapper {
+        width: 83%;
+        margin: 0 auto;
+}
+.dataTables_wrapper .dataTables_scroll {
+    clear: both;
+}
+.dataTables_scrollHead{
+    overflow: hidden;
+    position: relative;
+    border: 0px none;
+    width: 100%;
+}
+.dataTables_scrollHeadInner{
+    box-sizing: content-box;
+    width: 80%;
+    padding-right: 0px;
+}
+.display{
+    margin-left: 0px;
+    width: 1073px
+}
+#DataTable tr td{
+    width: 5%;
+}*/
+.table{
+    width: 83%;
+}
+.col-md-2{
+    width: 13.667%;
+    margin-top: 1.6%;
+    padding-top: 1%;
+}
+.dataTable_wrapper{
+    margin-top: 2%;
+}
+.dataTable_form{
+    margin-bottom: 0.5%;
+}
+.dataTable_header{
+
+}
+.dataTable_download a{
+
 }

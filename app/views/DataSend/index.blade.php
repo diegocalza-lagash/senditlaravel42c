@@ -1,38 +1,59 @@
+@extends("layouts.master")
+@section('title','Todos Los Trabajos')
+@section('content')
 <?php
-		$m = new MongoClient();//obsoleta desde mongo 1.0.0
-		$db = $m->SenditForm;
-		$collRepor = $db->Repor;
-		$docRepor = $collRepor->find();
+	$m = new MongoClient();//obsoleta desde mongo 1.0.0
+	$db = $m->SenditForm;
+	$collRepor = $db->Repor;
+	$docRepor = $collRepor->find();
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-	<title>Trabajos</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-</head>
+@if(Session::has('mensaje_error'))
+    <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>
+@endif
 
-<body>
-					@if(Session::has('mensaje_error'))
-                        <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>
-                    @endif
-{{ Form::open(array('url' => 'report/show','method' => 'get')) }}
-    {{ Form::label('equipo','Equipo') }}
-    {{ Form::text('equi','Caldera') }}
-    {{ Form::label('loc','Ubicación') }}
-    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2') }}
-    {{ Form::label('iden','Identificación') }}
-    {{ Form::text('iden','Poder')}}
-    {{ Form::label('dep','FTP') }}
-    {{ Form::text('dep','15/04/2017')}}
-    {{ Form::submit('Buscar'); }}
-{{ Form::close() }}
+<div class="dataTable_wrapper">
+	<div class="dataTable_form">
+		{{ Form::open(array('url' => 'report/show','method' => 'get')) }}
+	    {{ Form::label('equipo','Equipo') }}
+	    {{ $equipo = Form::text('equi','Caldera', $attributes = array('placeholder'=>"Caldera","id" =>"equipo")) }}
+	    {{ Form::label('loc','Ubicación') }}
+	    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2') }}
+	    {{ Form::label('iden','Identificación') }}
+	    {{ Form::text('iden','Poder')}}
+	    {{ Form::label('dep','FTP') }}
+	    {{ Form::text('dep','15/04/2017')}}
+	    {{ Form::submit('Buscar'); }}
+	{{ Form::close() }}
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#equipo").click(function(){
 
-	<table id= "lista-crud" class="table table-striped table-condensed listar-act">
+			$equipment = $("#equipo").val();
+			if ($equipment != "") {
+					$.ajax({
+					type 		:"get",
+					url 		:"DataSend/getEquipments.php",
+					data 		:{equipment: $(this).val()},
+					dataType 	:"json",
+					success 	:function(data){
+						$(".hint ul ").append("<li>data.nombre</li>");
+						console.log(data.nombre);
+					}
+				});
+			}
+
+		})
+	})
+	</script>
+	<div class="hint">
+		<ul>
+
+		</ul>
+	</div>
+	<table id= "lista-crud" class="table table-striped table-hover table-bordered table-condensed listar-act">
 		<thead>
 			<tr>
-
-
 				<th>Fecha De Envío</th>
 				<th>Enviado por</th>
 				<th>Ubicación</th>
@@ -84,12 +105,15 @@
 					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']?></td>
 
 					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
-					<td><a href="excel/{{$row['Entry']['Id']}}">Descargar Contenido</a></td>
+
 				</tr>
 				<?php
 			}
 				?>
 		</tbody>
 	</table>
-</body>
-</html>
+@stop
+</div>
+
+
+
