@@ -39,6 +39,24 @@ class DataSendController extends \BaseController {
 	/*public function __construct(){
 		$this->beforeFilter('auth.user');
 	}*/
+	public function getEquipments(){
+		echo "hola";
+		if (isset($_GET['equipment'])) {
+			$equipment = ($_GET['equipment']);
+			switch ($equipment) {
+				case 'c':
+					$e['nombre'] = "Caldera";
+					break;
+
+				case 'ca':
+
+					break;
+			}
+
+		}
+		echo json_encode($e);
+	}
+
 	public function getIndex()
 	{
 
@@ -48,8 +66,7 @@ class DataSendController extends \BaseController {
 
 	public function report(){
 		//echo "hola";
-		if (isset($_GET["equi"]))
-            {
+		if (isset($_GET["equi"])){
 				$equi = htmlspecialchars(Input::get("equi"));
 				$loc = htmlspecialchars(Input::get("loc"));
 				$iden = htmlspecialchars(Input::get("iden"));
@@ -3827,246 +3844,7 @@ class DataSendController extends \BaseController {
 			}//first if
 
 			//return View::make('DataSend.report', array("docRepor" => $docRepor));
-		}
-
-
-
-
-
-
-
-
-
-					/*for ($i=1; $i < count($g['retval']); $i++) {
-						$work = $g['retval'][$i]['work'];
-						echo $work1;
-						for ($j=0; $j < count($g['retval'][$i]['subworks']); $j++) {
-							$subwork = $g['retval'][$i]['subworks'][$j];
-								echo $subwork;
-								$dsr = $g['retval'][$i]['subworks'][$j];
-								$der= $g['retval'][$i]['subworks'][$j];
-								$poop = $g['retval'][$i]['subworks'][$j];
-								$obs = $g['retval'][$i]['subworks'][$j];
-								echo $dsr,$der,$poop,$obs;
-
-
-
-
-						}
-					}
-					//var_dump($subwork12);
-
-					/*foreach ($g as $v) {
-						//$v = (array)$v;
-					 	//$getwork[]=$v;
-					 	var_dump($v['retval']['work']);
-					}
-
-					/*$filter  = array();
-					$options = array('$sort' => array('works.work' => 1));
-					$orderwork = $collwf->aggregate($options);
-					$collobw = $db->orderbywork;
-					$docworkobw = $collobw->insert($orderwork);*/
-					//var_dump($orderwork['works']['work']);
-					//$orderwork = iterator_to_array($orderwork,false);
-					/*$cursor = $collwf->find();
-					//$cursor = $collwf->findOne(["work" => "Cambio de caps 5" ]);
-					$orderbywork = $cursor->sort(array('work' => 1));
-					$works = $collwf->distinct("work");
-					var_dump(count($works));
-					foreach ($orderbywork as $v) {
-						$v = (array)$v;
-						 $getwork[]=$v;
-					}
-					$work = $getwork[1]['work'];
-					$subwork = $getwork[1]['subwork'];
-					var_dump($work,$subwork);//, $subwork;
-					echo count($getwork);
-					if ( count($works) == 1 ) {
-						$array = array('work1' => $work,
-							'subwork1.1' => $subwork
-							);
-						var_dump($docwork);
-					}*/
-
-					//return View::make('DataSend.report',array("docRepor" => $docRepor));
-						/*$work_name = $w[0]['EQUIPMENT']['WORK']['WORK_NAME'];
-						$subwork_name = $w['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME'];
-						$objPHPExcel->getActiveSheet()->SetCellValue('C'.(string)($row), $work_name);
-						$objPHPExcel->getActiveSheet()->SetCellValue('C'.(string)($row), $subwork_name);
-
-
-
-						/*$subwork_dsr = $arr['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL'];
-						$subwork_der = $arr['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'];
-						$subwork_poop = $arr['EQUIPMENT']['WORK']['SUBWORK']['POOP'];
-						$subwork_obs = $arr['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS'];
-						$dsp = $arr['EQUIPMENT']['DATE_START_PROGRAMMED'];
-						$dep = $arr['EQUIPMENT']['DATE_END_PROGRAMMED'];
-
-
-
-
-
-						//$objPHPExcel->getActiveSheet()->getStyle('C'.(string)($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-						$objWriter->save("ReportOut.xlsx");
-						$row ++;
-						echo " exportando a excel ROW: ".$row;
-
-					return View::make('DataSend.report',array("docRepor" => $docRepor));*/
-
-						/*try {
-						$objPHPExcel = $objReader->load("ReportOut.xlsx");
-						} catch (Exception $e) {
-							$objPHPExcel = $objReader->load("/var/www/senditlaravel42/ReportOut.xlsx");
-						}
-						$objPHPExcel->setActiveSheetIndex(0);
-						$work = $objPHPExcel->getActiveSheet()->getCell('19')->getValue();
-
-						/*$objPHPExcel->getActiveSheet()->SetCellValue('C'.(string)($row)), $names);
-						$row ++;
-
-
-
-
-
-
-
-						$docwork = $collwf->find(['EQUIPMENT.WORK.WORK_NAME' =>  $work_name]);
-						$same_works = $db->$equal_works->insert($docwork);
-						foreach ($variable as $key => $value) {
-
-						}
-						$update = $same_works->update(
-							['Entry.AnswersJson.ADD_WORK_PAGE.WORK' => $work],
-							[ '$set' => ['Entry.Id' => $IdForm]]
-
-							);
-
-
-						echo '<pre>'.var_dump($work_name,$subwork_name,$subwork_poop,$dsp,$dep).'</pre>';
-						$work = new Work;
-						$work->nombre = $work_name;
-						$subwork = new Subwork;
-						$subwork->works_id = $work_name;
-						$subwork->nombre = $subwork_name;
-						$subwork->fecha_inicio_real = $subwork_dsr;
-						$subwork->fecha_termino_real = $subwork_der;
-						$subwork->poop = $subwork_poop;
-						$subwork->observaciones = $subwork_obs;
-
-					if ($work->save() && $subwork->save()) {
-						echo "insertado en work model and sub_work model";
-
-
-			        }}
-			        	$final_query = DB::table('subworks')->distinct()
-									->select('subworks.nombre','subworks.works_id')
-									->get();
-			        	//var_dump($final_query);
-			}
-		}					//echo "insertado en work model and sub_work model";
-	}						/*$first_query = DB::table('subworks')->distinct()
-									->join('works','works.id','=','subworks.id')
-									->select('subworks.nombre','subworks.fecha_inicio_real',
-											'subworks.fecha_termino_real','subworks.poop',
-											'subworks.observaciones');
-							$query = Work::find(1)->subworks->id;
-							var_dump($query);
-
-							/*$final_query = DB::table('works')->distinct()
-									->join('subworks','works.id','=','subworks.id')
-									->select('works.nombre','subworks.fecha_inicio_real',
-											'subworks.fecha_termino_real','subworks.poop',
-											'subworks.observaciones')
-									->get();
-									var_dump($final_query->name->name->fecha_inicio_real->fecha_termino_real);
-
-							$objPHPExcel = new PHPExcel();
-							$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-							try {
-								$objPHPExcel = $objReader->load("public/reports/reporteRudelEmpty.xlsx");
-							} catch (Exception $e) {
-								$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudelEmpty.xlsx");
-							}
-							$objPHPExcel->setActiveSheetIndex(0);
-
-							/*foreach ($final_query as $q) {
-								$names = $q->nombre;
-								$dsr = $q->fecha_inicio_real;
-								$der =	$q->fecha_termino_real;
-								$poop =	$q->poop;
-								$obs =$q->observaciones;
-								var_dump($names, $dsr,$der,$poop,$obs);
-
-								/*$objPHPExcel->getActiveSheet()->SetCellValue('C19', $names);
-								$objPHPExcel->getActiveSheet()->SetCellValue('C19', $names);
-								$objPHPExcel->getActiveSheet()->getStyle('C'.(string)($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-								$row ++;
-							}*/
-
-
-
-
-
-					//var_dump(iterator_to_array($docRepor,true));
-					//$docReporArray = iterator_to_array($docRepor,false);
-					/*for ($i=0; $i<count($docReporArray); $i++) {
-						$work_name = $docReporArray[$i]['EQUIPMENT']['WORK']['WORK_NAME'];
-						$work_name_next = $docReporArray[$i+1]['EQUIPMENT']['WORK']['WORK_NAME'];
-						if ($work_name == $work_name_next ) {
-							$work = new Work;
-							$work->nombre = $work_name;
-							$subwork = new Subwork;
-							$subwork->nombre = $docReporArray[$i+1]['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME'];
-							if ($work->save() && $subwork->save()) {
-								echo "trabajo insertado";
-							}
-						}
-					}*//*foreach ($docReporArray as $key => $arr) {
-						$work_name = $arr['EQUIPMENT']['WORK']['WORK_NAME'];
-						$work_name_next = $arr['EQUIPMENT']['WORK']['WORK_NAME'];
-						echo "{$key} => {$work_name} ";
-						var_dump($docReporArray);
-					}*/
-					//echo "{$i} => {$work_name} ";
-					//$key = array_search(40489, array_column($userdb, 'uid'));
-					/*for ($i=0; $i<count($docReporArray); $i++) {
-						//$keys = array_keys($docReporArray);
-						$work_name = $docReporArray[$i]['EQUIPMENT']['WORK']['WORK_NAME'];
-						$key = array_search($work_name, $docReporArray);
-
-
-
-
-					}echo $key;*/
-						//print $keys [1];
-						//var_dump((array_keys($docReporArray)));
-
-
-
-						/*$identificacion = $docRepor['EQUIPMENT']['IDENTIFICATION_EQUIPMENT']['IDENTIFICATION_NAME'];
-						$localization = $docRepor['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME'];
-
-						$work = $docRepor['EQUIPMENT']['WORK']['WORK_NAME'];
-						$sub_work = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['SUBWORK_NAME'];
-						$date_start_real = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL'];
-						$date_end_real = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'];
-						$poop = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['POOP'];
-						$obs = $docRepor['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS'];
-
-					}
-
-
-					//return View::make('DataSend.report',array("docRepor" => $docRepor));
-
-				}
-
-		//return View::make('DataSend.report',array("docRepor" => $docRepor));
-
-
-
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *

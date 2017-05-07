@@ -3,8 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title>Login</title>
-        {{ HTML::style('css/bootstrap.css'); }}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/css-table.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/reset.css') }}">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <!--{{ HTML::script('assets/js/bootstrap.min.js') }}-->
+        <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.js') }}"></script>
     </head>
     <body>
         <div class="container">
@@ -25,8 +32,9 @@
                             {{ Form::password('password', array('class' => 'form-control')); }}
                         </div>
                         <div class="checkbox">
+                        <p>Recordar contraseña</p>
                             <label>
-                                Recordar contraseña
+
                                 {{ Form::checkbox('rememberme', true) }}
                             </label>
                         </div>
@@ -35,7 +43,6 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery.js"></script>
-        {{ HTML::script('js/bootstrap.js'); }}
+
     </body>
 </html>
