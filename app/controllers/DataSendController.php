@@ -160,8 +160,10 @@ class DataSendController extends \BaseController {
 						$obs11 = $g['retval'][0]['subworks'][4];
 						$subwork12 = $g['retval'][0]['subworks'][5];
 						$dsr12 = new DateTime($g['retval'][0]['subworks'][6]);
+						$dsr12 = $dsr12->setTimezone(new DateTimeZone('America/Santiago'));
 						$dsr12 = $dsr12->format('d-m-Y, g:i a');
 						$der12 = new DateTime($g['retval'][0]['subworks'][7]);
+						$der12 = $der12->setTimezone(new DateTimeZone('America/Santiago'));
 						$der12 = $der12->format('d-m-Y, g:i a');
 						$poop12 = $g['retval'][0]['subworks'][8];
 						$obs12 = $g['retval'][0]['subworks'][9];
