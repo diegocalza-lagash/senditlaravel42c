@@ -43,7 +43,7 @@
 
 						<td><?php
 						$startTime = new DateTime($row['Entry']['StartTime']);
-						$startTime->setTimezone(new DateTimeZone('America/Santiago'));
+						//$startTime->setTimezone(new DateTimeZone('America/Santiago'));
 						echo $startTime->format('j F, Y, g:i a');
 							?>
 							<div >
@@ -61,13 +61,13 @@
 						<td><?php echo $row['EQUIPMENT']['DATE_END_PROGRAMMED']?></td>
 						<td><?php
 						$DATE_START_REAL = new DateTime($row['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL']);
-						$DATE_START_REAL->setTimezone(new DateTimeZone('America/Santiago'));
-						echo $DATE_START_REAL->format('j F, Y, g:i a');
+						//$DATE_START_REAL->setTimezone(new DateTimeZone('America/Santiago'));
+						echo $DATE_START_REAL->format('d-m-Y, g:i a');
 						?></td>
 						<td><?php
 						$DATE_END_REAL = new DateTime($row['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL']);
-						$DATE_END_REAL->setTimezone(new DateTimeZone('America/Santiago'));
-						echo $DATE_START_REAL->format('j F, Y, g:i a');
+						//$DATE_END_REAL->setTimezone(new DateTimeZone('America/Santiago'));
+						echo $DATE_END_REAL->format('d-m-Y, g:i a');
 						?></td>
 						<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['POOP']."%"?></td>
 						<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']?></td>
