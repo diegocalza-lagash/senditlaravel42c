@@ -57,7 +57,13 @@ class DataSendController extends \BaseController {
 				$equi = htmlspecialchars(Input::get("equi"));
 				$loc = htmlspecialchars(Input::get("loc"));
 				$iden = htmlspecialchars(Input::get("iden"));
+				$dsp = htmlspecialchars(Input::get("dsp"));
 				$dep = htmlspecialchars(Input::get("dep"));
+				$dsp = new DateTime($dsp);
+				$dsp = $dsp->format('d/m/Y');
+				$dep = new DateTime($dep);
+				$dep = $dep->format('d/m/Y');
+
 				$m = new MongoClient();//obsoleta desde mongo 1.0.0
 				$db = $m->SenditForm;
 				$collRepor = $db->Repor;
@@ -65,6 +71,7 @@ class DataSendController extends \BaseController {
 					'EQUIPMENT.EQUIPMENT_NAME' => $equi,
 					'EQUIPMENT.LOCALIZATION_EQUIPMENT.LOCALIZATION_NAME' => $loc,
 					'EQUIPMENT.IDENTIFICATION_EQUIPMENT.IDENTIFICATION_NAME' => $iden,
+					'EQUIPMENT.DATE_START_PROGRAMMED' => $dsp,
 					'EQUIPMENT.DATE_END_PROGRAMMED' => $dep
 					]);
 				//return View::make('DataSend.report',array("docRepor" => $docRepor));
@@ -260,9 +267,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AH24', $der14);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AN24', $poop14."%");
 
-						/*header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-						header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
-						header("Cache-Control: max-age=0");*/
+						//header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+						//header('Content-Disposition: attachment; filename="ReportOut.xlsx"');
+						//header("Cache-Control: max-age=0");
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
 						//$objWriter->save("php://output");

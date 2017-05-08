@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="{{ URL::asset('assets/css/reset.css') }}">
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<!--{{ HTML::script('assets/js/bootstrap.min.js') }}-->
+	<script type="text/javascript" src="{{ URL::asset('assets/jquery-ui-1.12.1/jquery-ui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('assets/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('assets/js/angular.min.js') }}"></script>

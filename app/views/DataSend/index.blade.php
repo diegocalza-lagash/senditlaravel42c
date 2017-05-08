@@ -10,20 +10,49 @@
 @if(Session::has('mensaje_error'))
     <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>
 @endif
-
+<!--
+Form::macro('myField', function()
+{
+    return '<input type="awesome">';
+});
+-->
+<!--<script type="text/javascript">
+	input date para mozilla
+	$(function() {
+     $( "#input_date" ).datepicker({ dateFormat: 'yy-mm-dd'});
+});-->
+</script>
 <div class="dataTable_wrapper">
 	<div class="dataTable_form">
 		{{ Form::open(array('url' => 'report/show','method' => 'get')) }}
-	    {{ Form::label('equipo','Equipo') }}
-	    {{ $equipo = Form::text('equi','Caldera', $attributes = array('placeholder'=>"Caldera","id" =>"equipo")) }}
+	    {{ Form::label('equipo','Equipo',['required' => 'true']) }}
+	    {{ Form::text('equi','Caldera', $attributes = array('placeholder'=>"Caldera","id" =>"equipo",'required' => 'true')) }}
 	    {{ Form::label('loc','Ubicación') }}
-	    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2') }}
+	    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2',['required' => 'true']) }}
 	    {{ Form::label('iden','Identificación') }}
-	    {{ Form::text('iden','Poder')}}
-	    {{ Form::text('dep','FTP') }}
-	    {{ Form::text('dep','15/04/2017')}}
+	    {{ Form::text('iden','Poder',['required' => 'true'])}}
+	    {{ Form::label('dsp','FIP') }}
+	    {{Form::input('date', 'dsp', null, ['class' => '', 'placeholder' => 'dd/mm/yyyy','id' => 'input_date','required' => 'true']) }}
+	    {{ Form::label('dep','FEP') }}
+	    {{Form::input('date', 'dep', null, ['class' => '', 'placeholder' => 'dd/mm/yyyy','id' => 'input_date','required' => 'true']) }}
+
+	    <!--{{ Form::text('dep','FTP') }}-->
 	    {{ Form::submit('Buscar'); }}
 	{{ Form::close() }}
+	<!--<form class="ng-pristine ng-valid" method="GET" action="report/show" >
+	    <label Equipo</label>
+	    <input placeholder="Caldera" id="equipo" name="equi" value="Caldera" type="text">
+	    <label>Ubicación</label>
+	    <input name="loc" value="Economizador II piso 6°, Buzón Eco 2" id="loc" type="text">
+	    <label>Identificación</label>
+	    <input name="iden" value="Poder" id="iden" type="text">
+	   <label >FIP</label>
+	    <input name="dep" value="15/04/2017" type="month" required>
+	    <label >FEP</label>
+	     <input name="dep" value="15/04/2017" type="date">
+	    <input value="Buscar" type="submit">
+
+	</form>-->
 	</div>
 	<script type="text/javascript">
 	/*$(document).ready(function(){
