@@ -1,5 +1,5 @@
 <?php
-	if (isset($_GET['equipment'])) {
+	/*if (isset($_GET['equipment'])) {
 			$equipment = ($_GET['equipment']);
 			$m = new MongoClient();
 			$db = $m->SenditForm;
@@ -7,6 +7,7 @@
 			$equipos = $collwf->find();
 			foreach ($equipos as $v) {
 				$equipo = $v['EQUIPMENT']['EQUIPMENT_NAME'];
+
 			}
 			switch ($equipment) {
 				case 'c':
@@ -19,5 +20,5 @@
 			}
 
 		}
-		echo json_encode($e);
+		echo json_encode($e);*/
 ?>
