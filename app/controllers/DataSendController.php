@@ -60,9 +60,13 @@ class DataSendController extends \BaseController {
 				$dsp = htmlspecialchars(Input::get("dsp"));
 				$dep = htmlspecialchars(Input::get("dep"));
 				$dsp = new DateTime($dsp);
+				//$dsp->setTimezone(new DateTimeZone('America/Santiago'));
 				$dsp = $dsp->format('d/m/Y');
+
 				$dep = new DateTime($dep);
+				//$dep->setTimezone(new DateTimeZone('America/Santiago'));
 				$dep = $dep->format('d/m/Y');
+				//echo $dsp." ". $dep;
 
 				$m = new MongoClient();//obsoleta desde mongo 1.0.0
 				$db = $m->SenditForm;
@@ -128,7 +132,9 @@ class DataSendController extends \BaseController {
 						$dsr11 = new DateTime($g['retval'][0]['subworks'][1]);
 						$dsr11 = $dsr11->format('d-m-Y, g:i a');
 						$der11 = new DateTime($g['retval'][0]['subworks'][2]);
-						$der11= $der11->format('d-m-Y, g:i a'); ;
+						$der11= $der11->format('d-m-Y, g:i a');
+						echo $dsr11."".$der11;
+
 						$poop11 = $g['retval'][0]['subworks'][3];
 						$obs11 = $g['retval'][0]['subworks'][4];
 						$objPHPExcel->getActiveSheet()->SetCellValue('D20', $work1);
@@ -139,7 +145,7 @@ class DataSendController extends \BaseController {
 
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						//$collwf->drop();//para que no agrege null en los works
+						$collwf->drop();//para que no agrege null en los works
 						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//1w  y 2
@@ -3833,6 +3839,7 @@ class DataSendController extends \BaseController {
 
 
 				}//else
+
 
 
 			}//first if
