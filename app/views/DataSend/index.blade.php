@@ -20,13 +20,13 @@
 	    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2') }}
 	    {{ Form::label('iden','Identificación') }}
 	    {{ Form::text('iden','Poder')}}
-	    {{ Form::label('dep','FTP') }}
+	    {{ Form::text('dep','FTP') }}
 	    {{ Form::text('dep','15/04/2017')}}
 	    {{ Form::submit('Buscar'); }}
 	{{ Form::close() }}
 	</div>
 	<script type="text/javascript">
-	$(document).ready(function(){
+	/*$(document).ready(function(){
 		$("#equipo").click(function(){
 
 			$equipment = $("#equipo").val();
@@ -44,7 +44,7 @@
 			}
 
 		})
-	})
+	})*/
 	</script>
 	<div class="hint">
 		<ul>
@@ -68,6 +68,7 @@
 				<th>Fecha De Término Real</th>
 				<th>Avance</th>
 				<th>Observaciones</th>
+				<th>Foto 1</th>
 
 			</tr>
 		</thead>
@@ -104,7 +105,13 @@
 					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['POOP']."%"?></td>
 					<td><?php echo $row['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']?></td>
 
-					<!--<td>{{ HTML::linkAction('DataSendController@report','Descargar Informe') }}</td>-->
+					<td>
+							<?php
+							$id = $row['Entry']['Id'];
+							$Id = substr($id, 0, 8).'-'.substr($id, 8, 4).'-'.substr($id, 12, 4).'-'.substr($id, 16, 4).'-'.substr($id, 20, 32);
+								echo '<a href="https://app.sendit.cl/Files/FormEntry/'.$row['ProviderId'].'-'.$Id.$row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO1'].'">Ver Foto</a>'
+							?>
+						</td>
 
 				</tr>
 				<?php

@@ -41,20 +41,7 @@ class DataSendController extends \BaseController {
 	}*/
 	public function getEquipments(){
 		echo "hola";
-		if (isset($_GET['equipment'])) {
-			$equipment = ($_GET['equipment']);
-			switch ($equipment) {
-				case 'c':
-					$e['nombre'] = "Caldera";
-					break;
 
-				case 'ca':
-
-					break;
-			}
-
-		}
-		echo json_encode($e);
 	}
 
 	public function getIndex()
