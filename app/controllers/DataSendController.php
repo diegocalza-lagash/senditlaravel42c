@@ -170,7 +170,7 @@ class DataSendController extends \BaseController {
 						$dsr11 = $dsr11->setTimezone(new DateTimeZone('America/Santiago'))->format('d-m-Y, g:i a');
 						$der11 = new DateTime($g['retval'][0]['subworks'][2]);
 						$der11= $der11->setTimezone(new DateTimeZone('America/Santiago'))->format('d-m-Y, g:i a');
-						echo $dsr11."".$der11;
+						//echo $dsr11."".$der11;
 
 						$poop11 = $g['retval'][0]['subworks'][3];
 						$obs11 = $g['retval'][0]['subworks'][4];
@@ -3907,18 +3907,19 @@ class DataSendController extends \BaseController {
 	{
 
 		$aRequest = json_decode(file_get_contents('php://input'),true);
-		/*try {
+		try {
 			$fichero=fopen('test.log','w');
 		} catch (Exception $e) {
 			echo "capturada";
-			chmod('test.log', 0777);
+			//chmod('test.log', 0777);
 		}
 		$fichero=fopen('test.log','w');
 	 		if($fichero == false) {
    			die("No se ha podido crear el archivo.");
 		}
 		fwrite($fichero,json_encode($aRequest));
-		fclose($fichero);*/
+		fclose($fichero);
+
 		$m = new MongoClient();//obsoleta desde mongo 1.0.0
 		$db = $m->SenditForm;
 		$collRepor = $db->Repor;
