@@ -33,7 +33,7 @@ Form::macro('myField', function()
 	    {{ Form::text('iden','Poder',['required' => 'true'])}}
 	    {{ Form::label('dsp','FIP') }}
 	    {{Form::input('date', 'dsp', null, ['class' => '', 'placeholder' => 'dd/mm/yyyy','id' => 'input_date','required' => 'true']) }}
-	    {{ Form::label('dep','FEP') }}
+	    {{ Form::label('dep','FTP') }}
 	    {{Form::input('date', 'dep', null, ['class' => '', 'placeholder' => 'dd/mm/yyyy','id' => 'input_date','required' => 'true']) }}
 
 	    <!--{{ Form::text('dep','FTP') }}-->
