@@ -20,7 +20,7 @@ Form::macro('myField', function()
      $( "#input_date" ).datepicker({ dateFormat: 'yy-mm-dd'});
 });-->
 </script>
-<div class="dataTable_wrapper">
+<div class="dataTable_wrapper" style ="margin-left: 12%; margin-top: 2%;">
 	<div class="dataTable_form">
 		@if(Session::has('mensaje_error'))
 	    <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>

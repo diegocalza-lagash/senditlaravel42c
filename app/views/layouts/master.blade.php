@@ -52,7 +52,7 @@
 @show
 
     @section('sidebar')
-    <div class= "col-sm-3 col-md-2 sidebar ">
+    <div class= "col-sm-3 col-md-2 sidebar " style="padding-top: 2%;">
           <ul class="nav nav-sidebar">
           	@yield('sidebar')
           </ul>
