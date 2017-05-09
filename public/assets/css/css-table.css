@@ -62,10 +62,11 @@ float: left;
 .col-md-2{
     width: 13.667%;
     margin-top: 1.6%;
-    padding-top: 1%;
+    padding-top: 2%;
 }
 .dataTable_wrapper{
     margin-top: 2%;
+    margin-left: 12%;
 }
 .dataTable_form{
     margin-bottom: 0.5%;

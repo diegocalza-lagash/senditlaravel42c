@@ -3907,7 +3907,7 @@ class DataSendController extends \BaseController {
 	{
 
 		$aRequest = json_decode(file_get_contents('php://input'),true);
-		try {
+		/*try {
 			$fichero=fopen('test.log','w');
 		} catch (Exception $e) {
 			echo "capturada";
@@ -3918,7 +3918,7 @@ class DataSendController extends \BaseController {
    			die("No se ha podido crear el archivo.");
 		}
 		fwrite($fichero,json_encode($aRequest));
-		fclose($fichero);
+		fclose($fichero);*/
 
 		$m = new MongoClient();//obsoleta desde mongo 1.0.0
 		$db = $m->SenditForm;
