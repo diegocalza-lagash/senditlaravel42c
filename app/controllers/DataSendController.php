@@ -115,11 +115,11 @@ class DataSendController extends \BaseController {
 						$ftp = $v['EQUIPMENT']['DATE_END_PROGRAMMED'];
 						$objPHPExcel = new PHPExcel();
 						$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-						try {
+						//try {
 							$objPHPExcel = $objReader->load("reporteRudel.xlsx");
-						} catch (Exception $e) {
-							$objPHPExcel = $objReader->load("/var/www/senditlaravel42/reporteRudel.xlsx");
-						}
+						//} /*catch (Exception $e) {
+						//	$objPHPExcel = $objReader->load("/var/www/senditlaravel42/reporteRudel.xlsx");
+						//}*/
 
 						$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
 						$objPHPExcel->getActiveSheet()->SetCellValue('H9', $loc);
@@ -129,7 +129,7 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD9', $std);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD10', $stn);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD11', $iptd);
-						$objPHPExcel->getActiveSheet()->SetCellValue('AD12', $block);
+						$objPHPExcel->getActiveSheet()->SetCellValue('AD12', $iptn);
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("reporteRudel2.xlsx");
 
@@ -148,11 +148,11 @@ class DataSendController extends \BaseController {
 					$docwork = $collwf->insert($g);
 					$objPHPExcel = new PHPExcel();
 					$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-					try {
+					//try {
 						$objPHPExcel = $objReader->load("reporteRudel2.xlsx");
-					} catch (Exception $e) {
-						$objPHPExcel = $objReader->load("/var/www/senditlaravel42/reporteRudel2.xlsx");
-					}
+				//	} catch (Exception $e) {
+					//	$objPHPExcel = $objReader->load("/var/www/senditlaravel42/reporteRudel2.xlsx");
+				//	}
 					$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
 					//echo count($g['retval']);
 					//1w y 1
