@@ -104,12 +104,44 @@ class DataSendController extends \BaseController {
 							));
 
 					}
+					//imprimo los datos dijos del reporte
+					foreach ($docRepor as $v) {
+						$std = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_DAY'];
+						$stn = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_NIGHT'];
+						$iptd = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['I_P_TURN_DAY'];
+						$iptn = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['I_P_TURN_NIGHT'];
+						$block = $v['EQUIPMENT']['BLOCK_SYSTEM'];
+						$fip = $v['EQUIPMENT']['DATE_START_PROGRAMMED'];
+						$ftp = $v['EQUIPMENT']['DATE_END_PROGRAMMED'];
+						$objPHPExcel = new PHPExcel();
+						$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+						try {
+							$objPHPExcel = $objReader->load("reporteRudel.xlsx");
+						} catch (Exception $e) {
+							$objPHPExcel = $objReader->load("/var/www/senditlaravel42/reporteRudel.xlsx");
+						}
+
+						$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
+						$objPHPExcel->getActiveSheet()->SetCellValue('H9', $loc);
+						$objPHPExcel->getActiveSheet()->SetCellValue('H11', $block);
+						$objPHPExcel->getActiveSheet()->SetCellValue('I14', $fip);
+						$objPHPExcel->getActiveSheet()->SetCellValue('I15', $ftp);
+						$objPHPExcel->getActiveSheet()->SetCellValue('AD9', $std);
+						$objPHPExcel->getActiveSheet()->SetCellValue('AD10', $stn);
+						$objPHPExcel->getActiveSheet()->SetCellValue('AD11', $iptd);
+						$objPHPExcel->getActiveSheet()->SetCellValue('AD12', $block);
+						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+						$objWriter->save("reporteRudel2.xlsx");
+
+					}
 
 					//$docwork = $collwf->insert($docRepor);
 
 					$keys = array("work" => 1);
 					$initial = array("subworks" => array());
-					$reduce = "function(obj, prev){prev.subworks.push(obj.subwork,obj.dsr,obj.der,obj.poop,obj.obs)}";
+					$reduce = "function(obj, prev){
+						prev.subworks.push(obj.subwork,obj.dsr,obj.der,obj.poop,obj.obs)
+					}";
 					$g = $collwf->group($keys, $initial,$reduce);
 					//$collwf->drop();
 					$collwf = $db->works_filter;
@@ -117,11 +149,10 @@ class DataSendController extends \BaseController {
 					$objPHPExcel = new PHPExcel();
 					$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 					try {
-						$objPHPExcel = $objReader->load("public/reports/reporteRudel.xlsx");
+						$objPHPExcel = $objReader->load("reporteRudel2.xlsx");
 					} catch (Exception $e) {
-						$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reports/reporteRudel.xlsx");
+						$objPHPExcel = $objReader->load("/var/www/senditlaravel42/reporteRudel2.xlsx");
 					}
-
 					$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
 					//echo count($g['retval']);
 					//1w y 1
@@ -145,7 +176,7 @@ class DataSendController extends \BaseController {
 
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 						$objWriter->save("ReportOut.xlsx");
-						$collwf->drop();//para que no agrege null en los works
+						//$collwf->drop();//para que no agrege null en los works
 						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
 					//1w  y 2
