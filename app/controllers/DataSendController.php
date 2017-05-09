@@ -113,6 +113,7 @@ class DataSendController extends \BaseController {
 						$block = $v['EQUIPMENT']['BLOCK_SYSTEM'];
 						$fip = $v['EQUIPMENT']['DATE_START_PROGRAMMED'];
 						$ftp = $v['EQUIPMENT']['DATE_END_PROGRAMMED'];
+						$hp = $v['EQUIPMENT']['HOUR_PROG'];
 						$objPHPExcel = new PHPExcel();
 						$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 						try {
@@ -126,6 +127,7 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('H11', $block);
 						$objPHPExcel->getActiveSheet()->SetCellValue('I14', $fip);
 						$objPHPExcel->getActiveSheet()->SetCellValue('I15', $ftp);
+						$objPHPExcel->getActiveSheet()->SetCellValue('I16', $hp);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD9', $std);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD10', $stn);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD11', $iptd);
@@ -3948,6 +3950,7 @@ class DataSendController extends \BaseController {
 						"BLOCK_SYSTEM" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM'],
 						"DATE_START_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED'],
 						"DATE_END_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'],
+						"HOUR_PROG" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['HOUR_PROG'],
 						"WORK" =>  array(
 							"WORK_NUEVO" => "SI",
 							"WORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'],
@@ -4072,6 +4075,7 @@ class DataSendController extends \BaseController {
 						"BLOCK_SYSTEM" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM'],
 						"DATE_START_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED'],
 						"DATE_END_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'],
+						"HOUR_PROG" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['HOUR_PROG'],
 						"WORK" =>  array(
 							"WORK_NUEVO" => "NO",
 							"WORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'],
@@ -4140,6 +4144,7 @@ class DataSendController extends \BaseController {
 						"BLOCK_SYSTEM" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['BLOCK_SYSTEM'],
 						"DATE_START_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED'],
 						"DATE_END_PROGRAMMED" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'],
+						"HOUR_PROG" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['HOUR_PROG'],
 						"WORK" =>  array(
 							"WORK_NUEVO" => "SI",
 							"WORK_NAME" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'],
