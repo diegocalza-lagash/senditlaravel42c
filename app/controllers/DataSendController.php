@@ -104,7 +104,7 @@ class DataSendController extends \BaseController {
 							));
 
 					}
-					//imprimo los datos dijos del reporte
+					//imprimo los datos fijos del reporte
 					foreach ($docRepor as $v) {
 						$std = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_DAY'];
 						$stn = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_NIGHT'];
