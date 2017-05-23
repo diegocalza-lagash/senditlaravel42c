@@ -94,17 +94,26 @@ class DataSendController extends \BaseController {
 
 						$docwork = $collwf->insert(array(
 							"work" => $v["EQUIPMENT"]["WORK"]["WORK_NAME"],
-							"subwork" => $v["EQUIPMENT"]["WORK"]["SUBWORK"]["SUBWORK_NAME"],
-							"work_nuevo" => $v['EQUIPMENT']['WORK']['WORK_NUEVO'],
-							"dsr" => $v['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL'],
-							"der" => $v['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'],
-							"poop" => $v['EQUIPMENT']['WORK']['SUBWORK']['POOP'],
-							"obs" => $v['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']
-
+							"subwork" => array(
+								"subw_name" => $v["EQUIPMENT"]["WORK"]["SUBWORK"]["SUBWORK_NAME"],
+								"work_nuevo" => $v['EQUIPMENT']['WORK']['WORK_NUEVO'],
+								"dsr" => $v['EQUIPMENT']['WORK']['SUBWORK']['DATE_START_REAL'],
+								"der" => $v['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'],
+								"poop" => $v['EQUIPMENT']['WORK']['SUBWORK']['POOP'],
+								"obs" => $v['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']
+								)/*,
+							"std" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_DAY'],
+							"stn" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_NIGHT'],
+							"iptd" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['I_P_TURN_DAY'],
+							"iptn" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['I_P_TURN_NIGHT'],
+							"block" => $v['EQUIPMENT']['BLOCK_SYSTEM'],
+							"fip" => $v['EQUIPMENT']['DATE_START_PROGRAMMED'],
+							"ftp" => $v['EQUIPMENT']['DATE_END_PROGRAMMED'],
+							"hp" => $v['EQUIPMENT']['HOUR_PROG']*/
 							));
 
 					}
-					//imprimo los datos dijos del reporte
+					//imprimo los datos fijos del reporte
 					foreach ($docRepor as $v) {
 						$std = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_DAY'];
 						$stn = $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_NIGHT'];
@@ -114,6 +123,8 @@ class DataSendController extends \BaseController {
 						$fip = $v['EQUIPMENT']['DATE_START_PROGRAMMED'];
 						$ftp = $v['EQUIPMENT']['DATE_END_PROGRAMMED'];
 						$hp = $v['EQUIPMENT']['HOUR_PROG'];
+						}//endforeach
+
 						$objPHPExcel = new PHPExcel();
 						$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 						try {
@@ -139,16 +150,12 @@ class DataSendController extends \BaseController {
 							$objWriter->save("/var/www/senditlaravel42/public/reporteRudel.2xlsx");
 						}
 
-					}//foreach
-
-					//$docwork = $collwf->insert($docRepor);
-
 					$keys = array("work" => 1);
-					$initial = array("subworks" => array());
+					$initial = array("subworks" => array());//,obj.std,obj.stn,obj.iptd,obj.iptn,obj.fip,obj.ftp,obj.hp
 					$reduce = "function(obj, prev){
-						prev.subworks.push(obj.subwork,obj.dsr,obj.der,obj.poop,obj.obs)
+						prev.subworks.push(obj.subwork.subw_name,obj.subwork.dsr,obj.subwork.der,obj.subwork.poop,obj.subwork.obs)
 					}";
-					$g = $collwf->group($keys, $initial,$reduce);
+					$g = $collwf->group($keys,$initial,$reduce);
 					//$collwf->drop();
 					$collwf = $db->works_filter;
 					$docwork = $collwf->insert($g);
@@ -160,7 +167,9 @@ class DataSendController extends \BaseController {
 						$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reporteRudel2.xlsx");
 					}
 					$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
-					//echo count($g['retval']);
+					//echo count($g);
+					//echo json_encode($g['retval']);
+
 					//1w y 1
 					if ($g['retval'][0]['work'] != null && count($g['retval']) == 1 && count($g['retval'][0]['subworks']) == 5) {
 						$work1 = $g['retval'][0]['work'];
