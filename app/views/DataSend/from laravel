@@ -1,0 +1,50 @@
+{{ Form::open(array('url' => 'report/show','method' => 'get')) }}
+		    {{ Form::label('equipo','Equipo',['required' => 'true']) }}
+		    {{ Form::text('equi','Caldera', $attributes = array('placeholder'=>"Caldera","id" =>"equipo",'required' => 'true')) }}
+		    {{ Form::label('loc','Ubicación') }}
+		    {{ Form::text('loc','Economizador II piso 6°, Buzón Eco 2',['required' => 'true']) }}
+		    {{ Form::label('iden','Identificación') }}
+		    {{ Form::text('iden','Poder',['required' => 'true'])}}
+		    {{ Form::label('dsp','FIP') }}
+		    {{Form::input('date', 'dsp', null, ['class' => '', 'placeholder' => 'dd/mm/yyyy','id' => 'input_date','required' => 'true']) }}
+		    {{ Form::label('dep','FTP') }}
+		    {{Form::input('date', 'dep', null, ['class' => '', 'placeholder' => 'dd/mm/yyyy','id' => 'input_date','required' => 'true']) }}
+
+		    {{ Form::text('dep','FTP') }}
+		    {{ Form::submit('Buscar'); }}
+		{{ Form::close() }}
+
+		<form id="form_dataform" class="ng-pristine ng-valid" method="POST" action="report/show" >
+	    <label> Equipo </label>
+	    <select id ="equi_select" name="equi">
+	    @foreach($equipments as $e)
+	    	<!--<option>@if(isset($e['equi'])) {{ $e['equi'] }} @endif</option>-->
+	    	<option value="{{$e['equi']}}"> {{ $e['equi'] }} </option>
+	    @endforeach
+	    </select>
+	    <input id ="equi_input" type="text" name="equi" required>
+
+	    <label>Ubicación</label>
+	     <select  id ="loc_select" name="loc" >
+	    @foreach($locs as $l)
+	    	<option value="{{ $l['loc'] }}">{{ $l['loc'] }}</option>
+	    @endforeach
+	    </select>
+	    <input id ="loc_input" type="text" name="loc" required>
+
+	    <label>Identificación</label>
+	     <select id="iden_select" name="iden">
+	    @foreach($idens as $i)
+	    	<option value="{{ $i['iden']}}">@if(isset($i['iden'])) {{ $i['iden'] }} @endif</option>
+	    @endforeach
+	    </select>
+	    <input id="iden_input" type="text" name="iden" required>
+
+	   <label >FIP</label>
+	    <input id="fip_input" name="dsp" type="date"  required>
+	    <label >FEP</label>
+	    <input name="dep" type="date"  required>
+
+	    <input value="Buscar" type="submit">
+
+	</form>
