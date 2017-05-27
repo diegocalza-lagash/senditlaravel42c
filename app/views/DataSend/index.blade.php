@@ -118,7 +118,6 @@ Form::macro('myField', function()
 				      e.preventDefault();
 				}
 
-
 		})//form
 
 

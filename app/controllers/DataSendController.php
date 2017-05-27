@@ -58,8 +58,8 @@ class DataSendController extends \BaseController {
 			$loc = htmlspecialchars(Input::get("loc"));
 			$iden = htmlspecialchars(Input::get("iden"));
 			$dsp = htmlspecialchars(Input::get("dsp"));
-			$dsp = $_GET['dsp'];
-			echo $dsp;
+			//$dsp = $_GET['dsp'];
+			//echo $dsp;
 			$dep = htmlspecialchars(Input::get("dep"));
 			/*$equi = $_POST["equi"];
 			$loc = $_POST["loc"];echo $loc;
@@ -79,7 +79,7 @@ class DataSendController extends \BaseController {
 			$m = new MongoClient();//obsoleta desde mongo 1.0.0
 			$db = $m->SenditForm;
 			$collRepor = $db->Repor;
-			echo $equi." ".$loc." ".$iden." ".$dsp." ". $dep;
+			//echo $equi." ".$loc." ".$iden." ".$dsp." ". $dep;
 			$docRepor = $collRepor->find([
 				'EQUIPMENT.EQUIPMENT_NAME' => $equi,
 				'EQUIPMENT.LOCALIZATION_EQUIPMENT.LOCALIZATION_NAME' => $loc,
@@ -88,12 +88,6 @@ class DataSendController extends \BaseController {
 				'EQUIPMENT.DATE_END_PROGRAMMED' => $dep
 				]);
 
-			foreach ($docRepor as $v) {
-				echo $v['EQUIPMENT']['EQUIPMENT_NAME'];
-				echo $v['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME'];
-				echo $v['Entry']['UserFirstName'];
-			}
-			}}/*
 				//return View::make('DataSend.report',array("docRepor" => $docRepor));
 				if (!$docRepor -> count()) {
 					return Redirect::to('/dataform')
