@@ -57,7 +57,7 @@ float: left;
     width: 5%;
 }*/
 .table{
-    width: 83%;
+    /*width: 83%;*/
 }
 .col-md-2{
     width: 13.667%;
@@ -65,11 +65,12 @@ float: left;
     padding-top: 2%;
 }
 .dataTable_wrapper{
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 12%;
 }
 .dataTable_form{
     margin-bottom: 0.5%;
+    margin-right: 3%;
 }
 .dataTable_header{
 

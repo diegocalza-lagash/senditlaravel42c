@@ -53,31 +53,47 @@ class DataSendController extends \BaseController {
 
 	public function report(){
 		//echo "hola";
-		if (isset($_GET["equi"])){
-				$equi = htmlspecialchars(Input::get("equi"));
-				$loc = htmlspecialchars(Input::get("loc"));
+		if (isset($_GET["equi"]) /*&& isset($_POST['loc']) && isset($_POST['iden']) && isset($_POST['dsp']) && isset($_POST['dep'])*/){
+			$equi = htmlspecialchars(Input::get("equi"));
+			$loc = htmlspecialchars(Input::get("loc"));
+			$iden = htmlspecialchars(Input::get("iden"));
+			$dsp = htmlspecialchars(Input::get("dsp"));
+			$dsp = $_GET['dsp'];
+			echo $dsp;
+			$dep = htmlspecialchars(Input::get("dep"));
+			/*$equi = $_POST["equi"];
+			$loc = $_POST["loc"];echo $loc;
+			$iden = $_POST['iden'];
+			$dsp = $_POST['dsp'];
+			$dep = $_POST['dep'];*/
+				/*$loc = htmlspecialchars(Input::get("loc"));
 				$iden = htmlspecialchars(Input::get("iden"));
 				$dsp = htmlspecialchars(Input::get("dsp"));
-				$dep = htmlspecialchars(Input::get("dep"));
-				$dsp = new DateTime($dsp);
-				//$dsp->setTimezone(new DateTimeZone('America/Santiago'));
-				$dsp = $dsp->format('d/m/Y');
+				$dep = htmlspecialchars(Input::get("dep"));*/
+			$dsp = new DateTime($dsp);
+			//$dsp->setTimezone(new DateTimeZone('America/Santiago'));
+			$dsp = $dsp->format('d/m/Y');
+			$dep = new DateTime($dep);
+			$dep = $dep->format('d/m/Y');
+			//echo $dsp." ". $dep;
+			$m = new MongoClient();//obsoleta desde mongo 1.0.0
+			$db = $m->SenditForm;
+			$collRepor = $db->Repor;
+			echo $equi." ".$loc." ".$iden." ".$dsp." ". $dep;
+			$docRepor = $collRepor->find([
+				'EQUIPMENT.EQUIPMENT_NAME' => $equi,
+				'EQUIPMENT.LOCALIZATION_EQUIPMENT.LOCALIZATION_NAME' => $loc,
+				'EQUIPMENT.IDENTIFICATION_EQUIPMENT.IDENTIFICATION_NAME' => $iden,
+				'EQUIPMENT.DATE_START_PROGRAMMED' => $dsp,
+				'EQUIPMENT.DATE_END_PROGRAMMED' => $dep
+				]);
 
-				$dep = new DateTime($dep);
-				//$dep->setTimezone(new DateTimeZone('America/Santiago'));
-				$dep = $dep->format('d/m/Y');
-				//echo $dsp." ". $dep;
-
-				$m = new MongoClient();//obsoleta desde mongo 1.0.0
-				$db = $m->SenditForm;
-				$collRepor = $db->Repor;
-				$docRepor = $collRepor->find([
-					'EQUIPMENT.EQUIPMENT_NAME' => $equi,
-					'EQUIPMENT.LOCALIZATION_EQUIPMENT.LOCALIZATION_NAME' => $loc,
-					'EQUIPMENT.IDENTIFICATION_EQUIPMENT.IDENTIFICATION_NAME' => $iden,
-					'EQUIPMENT.DATE_START_PROGRAMMED' => $dsp,
-					'EQUIPMENT.DATE_END_PROGRAMMED' => $dep
-					]);
+			foreach ($docRepor as $v) {
+				echo $v['EQUIPMENT']['EQUIPMENT_NAME'];
+				echo $v['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME'];
+				echo $v['Entry']['UserFirstName'];
+			}
+			}}/*
 				//return View::make('DataSend.report',array("docRepor" => $docRepor));
 				if (!$docRepor -> count()) {
 					return Redirect::to('/dataform')
@@ -101,15 +117,7 @@ class DataSendController extends \BaseController {
 								"der" => $v['EQUIPMENT']['WORK']['SUBWORK']['DATE_END_REAL'],
 								"poop" => $v['EQUIPMENT']['WORK']['SUBWORK']['POOP'],
 								"obs" => $v['EQUIPMENT']['WORK']['SUBWORK']['OBSERVATIONS']
-								)/*,
-							"std" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_DAY'],
-							"stn" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['S_TURN_NIGHT'],
-							"iptd" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['I_P_TURN_DAY'],
-							"iptn" => $v['EQUIPMENT']['WORK']['TURNS_PAGE']['I_P_TURN_NIGHT'],
-							"block" => $v['EQUIPMENT']['BLOCK_SYSTEM'],
-							"fip" => $v['EQUIPMENT']['DATE_START_PROGRAMMED'],
-							"ftp" => $v['EQUIPMENT']['DATE_END_PROGRAMMED'],
-							"hp" => $v['EQUIPMENT']['HOUR_PROG']*/
+								)
 							));
 
 					}
@@ -3914,8 +3922,9 @@ class DataSendController extends \BaseController {
 	 */
 	public function store()
 	{
-
+		//recibo los datos de APP movil
 		$aRequest = json_decode(file_get_contents('php://input'),true);
+
 		/*try {
 			$fichero=fopen('test.log','w');
 		} catch (Exception $e) {
@@ -3929,8 +3938,44 @@ class DataSendController extends \BaseController {
 		fwrite($fichero,json_encode($aRequest));
 		fclose($fichero);*/
 
+		//guardo nombre de Equipos
 		$m = new MongoClient();//obsoleta desde mongo 1.0.0
 		$db = $m->SenditForm;
+
+		$equipments = array("equi" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT']);
+		$coll_equipments = $db->equipments;
+		if($coll_equipments->count() == 0){
+			$coll_equipments->insert($equipments);
+		}else{
+			$result = $coll_equipments->findOne(["equi" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT']]);
+			if (!$result) {
+			$coll_equipments->insert($equipments);
+			}
+		}
+		//guardo ubicaciones
+		$locs = array("loc" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['LOCALIZATION_EQUIPMENT']);
+		$coll_locs = $db->locs;
+		if($coll_locs->count() == 0){
+			$coll_locs->insert($locs);
+		}else{
+			$result = $coll_locs->findOne(["loc" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['LOCALIZATION_EQUIPMENT']]);
+			if (!$result) {
+			$coll_locs->insert($locs);
+			}
+		}
+		//guardo identificaciones
+		$idens = array("iden" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['IDENTIFICATION_EQUIPMENT']);
+		$coll_idens = $db->idens;
+		if($coll_idens->count() == 0){
+			$coll_idens->insert($idens);
+		}else{
+			$result = $coll_idens->findOne(["iden" => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['IDENTIFICATION_EQUIPMENT']]);
+			if (!$result) {
+			$coll_idens->insert($idens);
+			}
+		}
+
+		//guardo datos que vienen del app movil
 		$collRepor = $db->Repor;
 		if ($collRepor->count() == 0 ){
 				$array = array(
@@ -4116,16 +4161,21 @@ class DataSendController extends \BaseController {
 						)
 						)
 				);
+			//verifico que no se inserte una mismo subtrabajo con la misma fecha de programacion
 			$result = $collRepor->findOne([
-				'EQUIPMENT.WORK.WORK_NAME' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK']
+				'EQUIPMENT.WORK.WORK_NAME' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['WORK'],
+				'EQUIPMENT.WORK.SUBWORK.SUBWORK_NAME' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['SUBWORK'],
+				'EQUIPMENT.DATE_START_PROGRAMMED' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_START_PROGRAMMED'],
+				'EQUIPMENT.DATE_END_PROGRAMMED' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['DATE_END_PROGRAMMED'],
+				'EQUIPMENT.EQUIPMENT_NAME' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['EQUIPMENT'],
+				/*'EQUIPMENT.LOCALIZATION_EQUIPMENT.LOCALIZATION_NAME' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['LOCALIZATION_EQUIPMENT'],
+				'EQUIPMENT.IDENTIFICATION_EQUIPMENT.IDENTIFICATION_NAME' => $aRequest['Entry']['AnswersJson']['ADD_WORK_PAGE']['IDENTIFICATION_EQUIPMENT']*/
 				]);
-			//$result = (array)$result;
+			if (!$result) {
 
-				//var_dump($value['EQUIPMENT']['WORK']['WORK_NAME']);
-			if ($result) {
+				$docRepor = $collRepor->insert($array);
+				echo "Insertado en Repor work nuevo : no";
 
-			$docRepor = $collRepor->insert($array);
-			echo "Insertado en Repor work nuevo : no";
 			}else{
 				$array = array(
 					"ProviderId" => $aRequest['ProviderId'],
@@ -4185,8 +4235,9 @@ class DataSendController extends \BaseController {
 						)
 					)
 				);
-				$docRepor = $collRepor->insert($array);
-				echo "Insertado en Repor work nuevo : SI";
+				$coll_same_sub = $db->Same_subw;
+				$docRepor = $coll_same_sub->insert($array);
+				echo "Insertado en collection Same_subw";
 			}
 
 			//var_dump($result);
