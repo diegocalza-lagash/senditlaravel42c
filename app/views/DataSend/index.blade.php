@@ -28,11 +28,11 @@ Form::macro('myField', function()
      $( "#input_date" ).datepicker({ dateFormat: 'yy-mm-dd'});
 });-->
 </script>
-<div class="dataTable_wrapper" style ="margin-left: 12%; margin-top: 3%;width: 87%;border: 1px solid #d9d9d9; padding: 5px;">
-	<div class="dataTable_form">
-		@if(Session::has('mensaje_error'))
-	    <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>
-		@endif
+@if(Session::has('mensaje_error'))
+<div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>
+@endif
+<div class="dataTable_form">
+
 
 	    {{ Form::open(array('url' => 'report/show','method' => 'get','style' => '')) }}
 	    	<label> Equipo </label>
@@ -67,8 +67,10 @@ Form::macro('myField', function()
 			    {{ Form::submit('Buscar'); }}
 		{{ Form::close() }}
 	</div>
+<div class="dataTable_wrapper" style ="/*margin-left: 12%; margin-top: 3%;width: 87%;border: 1px solid #d9d9d9; padding: 5px;*/">
 
-    <script type="text/javascript">
+
+<script type="text/javascript">
 	$(document).ready(function(){
 		//Asignar valores a los inputs del form
 		//asgina el valor por defecto del dropdrownlist
@@ -119,7 +121,6 @@ Form::macro('myField', function()
 				}
 
 		})//form
-
 
 	})//document
 	//VALIDO FORMATO DE LA FECHAS
@@ -173,23 +174,23 @@ Form::macro('myField', function()
 
 		})
 	})*/
-	</script>
-	<div class="data_table" style="position: relative;overflow: auto;width: 100%;">
+</script>
+	<div class="data_table" style="/*position: relative;overflow: auto;width: 100%;*/">
 		<table id= "lista-crud" class="table table-striped table-hover table-bordered table-condensed listar-act">
 			<thead>
 				<tr>
-					<th>Fecha De Envío</th>
+					<th>Fecha de Envío</th>
 					<th>Enviado por</th>
 					<th>Ubicación</th>
 					<th>Equipo</th>
 					<th>Identificación Equipo</th>
 					<th>Sistema de bloqueo</th>
-					<th>Trabajo</th>
-					<th>SubTrabajo</th>
-					<th>Fecha De Inicio Programada</th>
-					<th>Fecha De Término Programada</th>
-					<th>Fecha De Inicio Real</th>
-					<th>Fecha De Término Real</th>
+					<th><b>Trabajo</b></th>
+					<th><b>SubTrabajo</b></th>
+					<th>Fecha de Inicio Programada</th>
+					<th>Fecha de Término Programada</th>
+					<th>Fecha de Inicio Real</th>
+					<th>Fecha de Término Real</th>
 					<th>Avance</th>
 					<th>Observaciones</th>
 					<th>Foto 1</th>
@@ -206,6 +207,10 @@ Form::macro('myField', function()
 						$startTime->setTimezone(new DateTimeZone('America/Santiago'));
 						echo $startTime->format('j F, Y, g:i a');
 							?>
+							<div>
+							<?php $uploaded= new DateTime($row['Entry']['CompleteTime']) ?>
+								<span><b>Subido: </b>{{ $uploaded->format('d-F-Y g:i a') }}</span>
+							</div>
 						</td>
 						<td><?php echo $row['Entry']['UserFirstName']." ".$row['Entry']['UserLastName'];?></td>
 						<td><?php echo $row['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME'];?></td>

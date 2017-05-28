@@ -51,8 +51,11 @@
 	</header>
 @show
 
-    @section('sidebar')
-    <div class= "col-sm-3 col-md-2 sidebar " style="padding-top: 2%;">
+
+	<div class="container-fluid">
+	@section('sidebar')
+	<section>
+		<div class= "col-sm-3 col-md-2 sidebar " style="padding-top: 2%;">
           <ul class="nav nav-sidebar">
           	@yield('sidebar')
           </ul>
@@ -60,15 +63,16 @@
             @yield('trabajos')
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="/logout">Log Out</a></li>
+            <li><a href="/logout">Cerrar Sesión</a></li>
           </ul>
            <ul class="nav nav-sidebar">
 
           </ul>
 
-    </div>
+    	</div>
+	</section>
+
 	@show
-	<div class="container-fluid">
 		@yield('content')
 	</div>
 

@@ -90,6 +90,7 @@ class DataSendController extends \BaseController {
 
 				//return View::make('DataSend.report',array("docRepor" => $docRepor));
 				if (!$docRepor -> count()) {
+					//Session::flash('mensaje_error', 'No Existen Trabajos')
 					return Redirect::to('/dataform')
                     ->with('mensaje_error', 'No Existen Trabajos');
 				}else{
@@ -3883,7 +3884,8 @@ class DataSendController extends \BaseController {
 						$objWriter->save("ReportOut.xlsx");
 						return View::make('DataSend.report', array("docRepor" => $docRepor));
 					}
-
+					//echo("Se ha superado max numero de trabajos");
+					return Redirect::to('/dataform')->with('mensaje_error', 'Se ha superado max numero de trabajos');
 
 
 
