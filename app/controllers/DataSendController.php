@@ -150,7 +150,7 @@ class DataSendController extends \BaseController {
 						try {
 							$objWriter->save("public/reporteRudel2.xlsx");
 						} catch (Exception $e) {
-							$objWriter->save("/var/www/senditlaravel42/public/reporteRudel.2xlsx");
+							$objWriter->save("/var/www/senditlaravel42/public/reporteRudel2.xlsx");
 						}
 
 					$keys = array("work" => 1);

@@ -207,10 +207,10 @@ Form::macro('myField', function()
 						$startTime->setTimezone(new DateTimeZone('America/Santiago'));
 						echo $startTime->format('j F, Y, g:i a');
 							?>
-							<div>
+							<!--<div>
 							<?php $uploaded= new DateTime($row['Entry']['CompleteTime']) ?>
 								<span><b>Subido: </b>{{ $uploaded->format('d-F-Y g:i a') }}</span>
-							</div>
+							</div>-->
 						</td>
 						<td><?php echo $row['Entry']['UserFirstName']." ".$row['Entry']['UserLastName'];?></td>
 						<td><?php echo $row['EQUIPMENT']['LOCALIZATION_EQUIPMENT']['LOCALIZATION_NAME'];?></td>
