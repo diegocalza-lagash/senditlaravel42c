@@ -130,11 +130,11 @@ class DataSendController extends \BaseController {
 
 						$objPHPExcel = new PHPExcel();
 						$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-						try {
-							$objPHPExcel = $objReader->load("public/reporteRudel.xlsx");
-						} catch (Exception $e) {
+						//try {
+						//	$objPHPExcel = $objReader->load("public/reporteRudel.xlsx");
+						//} catch (Exception $e) {
 							$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reporteRudel.xlsx");
-						}
+						//}
 
 						$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
 						$objPHPExcel->getActiveSheet()->SetCellValue('H9', $loc);
@@ -147,11 +147,11 @@ class DataSendController extends \BaseController {
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD11', $iptd);
 						$objPHPExcel->getActiveSheet()->SetCellValue('AD12', $iptn);
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-						try {
-							$objWriter->save("public/reporteRudel2.xlsx");
-						} catch (Exception $e) {
+						//try {
+						//	$objWriter->save("public/reporteRudel2.xlsx");
+						//} catch (Exception $e) {
 							$objWriter->save("/var/www/senditlaravel42/public/reporteRudel2.xlsx");
-						}
+						//}
 
 					$keys = array("work" => 1);
 					$initial = array("subworks" => array());//,obj.std,obj.stn,obj.iptd,obj.iptn,obj.fip,obj.ftp,obj.hp
@@ -164,11 +164,11 @@ class DataSendController extends \BaseController {
 					$docwork = $collwf->insert($g);
 					$objPHPExcel = new PHPExcel();
 					$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-					try {
-						$objPHPExcel = $objReader->load("public/reporteRudel2.xlsx");
-					} catch (Exception $e) {
+					//try {
+					//	$objPHPExcel = $objReader->load("public/reporteRudel2.xlsx");
+					//} catch (Exception $e) {
 						$objPHPExcel = $objReader->load("/var/www/senditlaravel42/public/reporteRudel2.xlsx");
-					}
+					//}
 					$objWorksheet= $objPHPExcel->setActiveSheetIndex(0);
 					//echo count($g);
 					//echo json_encode($g['retval']);
