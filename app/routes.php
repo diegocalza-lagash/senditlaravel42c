@@ -16,6 +16,7 @@ error_reporting(E_ALL);
     });*/
 
 Route::resource('data','DataSendController');
+Route::resource('report-tech','ReportTechController');
 Route::controller('dataform','DataSendController');
 
 Route::get('report/show', 'DataSendController@report');

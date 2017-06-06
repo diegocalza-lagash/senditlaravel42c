@@ -124,37 +124,37 @@ Form::macro('myField', function()
 
 	})//document
 	//VALIDO FORMATO DE LA FECHAS
-	function validarFormatoFecha(fip,ftp) {
-		//formato dd-mm-yyyy
-	      var RegExPattern = /^\d{2,4}\-\d{1,2}\-\d{1,2}$/;///^\d{1,2}\/\d{1,2}\/\d{2,4}$/; -> formato dd/mm/yyyy
-	      if ((fip.match(RegExPattern)) && (fip!='' && ftp.match(RegExPattern) && ftp!='')) {
-	            return true;
-	      } else {
-	            return false;
-	      }
-	}
-	//VALIDO QUE FTP MAYOR QUE FIP
-	function ftpMayorFip(fip,ftp){
-		var fip = fip.split("-");
-		var ftp = ftp.split("-");
-		//console.log(fip,ftp);
-		var fip = new Date(fip[0],fip[1]-1,fip[2]);
-		var ftp = new Date(ftp[0],ftp[1]-1,ftp[2])
-		//console.log(fip,ftp);
-		if (fip <= ftp) {
-			return true;
-		}else{
-			return false;
+		function validarFormatoFecha(fip,ftp) {
+			//formato dd-mm-yyyy
+		      var RegExPattern = /^\d{2,4}\-\d{1,2}\-\d{1,2}$/;///^\d{1,2}\/\d{1,2}\/\d{2,4}$/; -> formato dd/mm/yyyy
+		      if ((fip.match(RegExPattern)) && (fip!='' && ftp.match(RegExPattern) && ftp!='')) {
+		            return true;
+		      } else {
+		            return false;
+		      }
 		}
-	}
-	//VALIDO QUE LA FECHA SEA DEL CALENDARIO
-	function existeFecha (fecha) {
-        var fechaf = fecha.split("-");
-        var d = fechaf[2];
-        var m = fechaf[1];
-        var y = fechaf[0];
-        return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
-	}
+		//VALIDO QUE FTP MAYOR QUE FIP
+		function ftpMayorFip(fip,ftp){
+			var fip = fip.split("-");
+			var ftp = ftp.split("-");
+			//console.log(fip,ftp);
+			var fip = new Date(fip[0],fip[1]-1,fip[2]);
+			var ftp = new Date(ftp[0],ftp[1]-1,ftp[2])
+			//console.log(fip,ftp);
+			if (fip <= ftp) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+		//VALIDO QUE LA FECHA SEA DEL CALENDARIO
+		function existeFecha (fecha) {
+	        var fechaf = fecha.split("-");
+	        var d = fechaf[2];
+	        var m = fechaf[1];
+	        var y = fechaf[0];
+	        return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
+		}
 	/*$(document).ready(function(){
 		$("#equipo").click(function(){
 
@@ -175,6 +175,7 @@ Form::macro('myField', function()
 		})
 	})*/
 </script>
+
 	<div class="data_table" style="/*position: relative;overflow: auto;width: 100%;*/">
 		<table id= "lista-crud" class="table table-striped table-hover table-bordered table-condensed listar-act">
 			<thead>
@@ -237,9 +238,8 @@ Form::macro('myField', function()
 						<td><?php
 
 							if ($row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO1']!= "") {
-								$id = $row['Entry']['Id'];
-								$Id = substr($id, 0, 8).'-'.substr($id, 8, 4).'-'.substr($id, 12, 4).'-'.substr($id, 16, 4).'-'.substr($id, 20, 32);
-									echo '<a href="https://app.sendit.cl/Files/FormEntry/'.$row['ProviderId'].'-'.$Id.$row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO1'].'">Ver Foto</a>';
+
+									echo '<a href="'.$row['EQUIPMENT']['WORK']['PHOTOS']['PHOTO1'].'">Ver Foto</a>';
 							}else{echo "-";}
 							?>
 
